@@ -51,7 +51,7 @@ Ext.define('Ext.fx.Manager', {
         
         // Do not use fireIdleEvent: false. Each tick of the TaskRunner needs to fire the idleEvent
         // in case an animation callback/listener adds a listener.
-        me.taskRunner = new Ext.util.TaskRunner();
+        me.taskRunner = new Ext.util.TaskRunner({interval: 16});
 
         // this.requestAnimFrame = (function() {
         //     var raf = window.requestAnimationFrame ||

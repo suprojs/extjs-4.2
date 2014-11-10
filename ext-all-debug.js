@@ -8415,7 +8415,7 @@ Ext.define('Ext.util.TaskRunner', {
     
 
     
-    interval: 10,
+    interval: 1024,
 
     
     timerId: null,
@@ -25176,7 +25176,7 @@ Ext.define('Ext.fx.Manager', {
         
         
         
-        me.taskRunner = new Ext.util.TaskRunner();
+        me.taskRunner = new Ext.util.TaskRunner({interval: 16});
 
         
         
