@@ -87181,6 +87181,11 @@ Ext.define("Ext.form.Labelable", {
                 '<div role="alert" aria-live="polite" id="{id}-errorEl" class="{errorMsgClass}" colspan="2" style="display:none"></div>',
                 '{afterBodyEl}',
                 '</td>',
+            '<tpl else>',
+                '</td>',
+                '<td class="x-form-item-label">',
+                '{afterBodyEl}',
+                '</td>',
             '</tpl>',
         '</tr>',
         {
