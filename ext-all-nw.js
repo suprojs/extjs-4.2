@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 Contact:  http://www.sencha.com/contact
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (c192e7feae787f4db33dc1d77c0aa49c2f90b9a0)
+Source: ext-all-debug.js (bc11ee8988658749654d3054fa0f7c083f25fea2)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -20,7 +20,6 @@ var method = callOverrideParent.caller.caller;
 return method.$owner.prototype[method.$name].apply(this, arguments);
 },
 i,
-nonWhitespaceRe = /\S/,
 ExtApp,
 iterableRe = /\[object\s*(?:Array|Arguments|\w*Collection|\w*List|HTML\s+document\.all\s+class)\]/;
 Ext.global = global;
@@ -191,7 +190,7 @@ return 'function';
 if (type === 'object') {
 if (value.nodeType !== undefined) {
 if (value.nodeType === 3) {
-return (nonWhitespaceRe).test(value.nodeValue) ? 'textnode' : 'whitespace';
+return /\S/.test(value.nodeValue) ? 'textnode' : 'whitespace';
 }
 else {
 return 'element';
@@ -3715,6 +3714,9 @@ for (i = 0, ln = rewrites.length; i < ln; i++) {
 rewrite = rewrites[i];
 from = rewrite.from;
 to = rewrite.to;
+if(!name) throw new Error(
+'`namespace` is undefined see console for "xtype"'
+)
 if (name === from || name.substring(0, from.length) === from) {
 name = name.substring(from.length);
 if (typeof to != 'string') {
@@ -4167,6 +4169,7 @@ return config;
 alias = 'widget.' + xtype;
 className = Manager.getNameByAlias(alias);
 if (!className) {
+console.warn('`xtype` is undefined: ' + xtype)
 load = true;
 }
 T = Manager.get(className);
@@ -4177,10 +4180,10 @@ return new T(config);
 },
 createByAlias: alias(Manager, 'instantiateByAlias'),
 define: function (className, data, createdFn) {
-if (data.override) {
-return Manager.createOverride.apply(Manager, arguments);
+if (!data.override) {
+return Manager.create(className, data, createdFn);
 }
-return Manager.create.apply(Manager, arguments);
+return Manager.createOverride(className, data, createdFn);
 },
 undefine: function(className) {
 var classes = Manager.classes,
@@ -4243,7 +4246,7 @@ namespace: alias(Manager, 'createNamespaces')
 Ext.createWidget = Ext.widget;
 Ext.ns = Ext.namespace;
 Class.registerPreprocessor('className', function(cls, data) {
-if (data.$className) {
+if ('$className' in data) {
 cls.$className = data.$className;
 }
 }, true, 'first');
@@ -5878,7 +5881,7 @@ return s.replace(/([\-.*+?\^${}()|\[\]\/\\])/g, "\\$1");
 });
 }());
 Ext.define('Ext.util.TaskRunner', {
-interval: 10,
+interval: 1024,
 timerId: null,
 constructor: function (interval) {
 var me = this;
@@ -14960,6 +14963,7 @@ return loader;
 },
 syncContent: function(source) {
 source = Ext.getDom(source);
+if(!source) return;
 var sourceNodes = source.childNodes,
 sourceLen = sourceNodes.length,
 dest = this.dom,
@@ -15091,7 +15095,7 @@ tabIndexAttr = dom.getAttributeNode('tabIndex'),
 tabIndex,
 nodeName = dom.nodeName,
 canFocus = false;
-if (tabIndexAttr && tabIndexAttr.specified) {
+if (tabIndexAttr) {
 tabIndex = tabIndexAttr.value;
 }
 if (dom && !dom.disabled) {
@@ -16459,8 +16463,8 @@ return o;
 updateKey: function(oldKey, newKey) {
 var me = this,
 map = me.map,
-indexMap = me.indexMap,
 index = me.indexOfKey(oldKey),
+indexMap = me.indexMap,
 item;
 if (index > -1) {
 item = map[oldKey];
@@ -17760,6 +17764,7 @@ anim.paused = false;
 }
 anim.on('afteranimate', function() {
 Ext.Array.remove(queue, anim);
+me.removeAnim(anim);
 if (queue.length === 0) {
 me.targets.remove(anim.target);
 }
@@ -17787,7 +17792,7 @@ var me = this;
 me.items = new Ext.util.MixedCollection();
 me.targetArr = {};
 me.mixins.queue.constructor.call(me);
-me.taskRunner = new Ext.util.TaskRunner();
+me.taskRunner = new Ext.util.TaskRunner({interval: 16});
 },
 interval: 16,
 forceJS: true,
@@ -21707,10 +21712,10 @@ clearHeight = !Ext.isNumber(me.height);
 me.setSize(w, h);
 me.el.setSize(curWidth, curHeight);
 if (clearWidth) {
-delete me.width;
+me.width = void 0;
 }
 if (clearHeight) {
-delete me.height;
+me.height = void 0;
 }
 }
 if (hasToWidth) {
@@ -22518,15 +22523,16 @@ me.fireEvent('boxready', me, width, height);
 },
 enable: function(silent) {
 var me = this;
-delete me.disableOnBoxReady;
+if(!me.disabled) return me;
+me.disabled = false;
 me.removeCls(me.disabledCls);
 if (me.rendered) {
 me.onEnable();
 } else {
 me.enableOnBoxReady = true;
 }
-me.disabled = false;
-delete me.resetDisable;
+me.disableOnBoxReady && (me.disableOnBoxReady = false);
+me.resetDisable && (me.resetDisable = false);
 if (silent !== true) {
 me.fireEvent('enable', me);
 }
@@ -22534,16 +22540,17 @@ return me;
 },
 disable: function(silent) {
 var me = this;
-delete me.enableOnBoxReady;
+if(me.disabled) return me;
+me.disabled = true;
+me.enableOnBoxReady && (me.enableOnBoxReady = false);
 me.addCls(me.disabledCls);
 if (me.rendered) {
 me.onDisable();
 } else {
 me.disableOnBoxReady = true;
 }
-me.disabled = true;
 if (silent !== true) {
-delete me.resetDisable;
+me.resetDisable && (me.resetDisable = false);
 me.fireEvent('disable', me);
 }
 return me;
@@ -22718,13 +22725,9 @@ width  = width.width;
 }
 if (typeof width == 'number') {
 me.width = Ext.Number.constrain(width, me.minWidth, me.maxWidth);
-} else if (width === null) {
-delete me.width;
 }
 if (typeof height == 'number') {
 me.height = Ext.Number.constrain(height, me.minHeight, me.maxHeight);
-} else if (height === null) {
-delete me.height;
 }
 if (me.rendered && me.isVisible()) {
 me.updateLayout({
@@ -25489,6 +25492,7 @@ if (!(layoutClass = layoutsByType[type])) {
 alias = 'layout.' + type;
 className = ClassManager.getNameByAlias(alias);
 if (!className) {
+console.warn('`type` is undefined: ' + type)
 load = true;
 }
 layoutClass = ClassManager.get(className);
@@ -30011,6 +30015,9 @@ this.remove(this.lookup(s));
 }
 },
 lookup : function(store) {
+if ('string' == typeof store) {
+return this.get(store);
+}
 if (Ext.isArray(store)) {
 var fields = ['field1'], 
 expand = !Ext.isArray(store[0]),
@@ -30034,9 +30041,6 @@ autoDestroy: true,
 autoCreated: true,
 expanded: expand
 });
-}
-if (Ext.isString(store)) {
-return this.get(store);
 } else {
 return Ext.data.AbstractStore.create(store);
 }
@@ -31266,7 +31270,7 @@ operations: operations,
 listeners: me.getBatchListeners()
 }));
 }
-return me;
+return needsSync;
 },
 getBatchListeners: function() {
 var me = this,
@@ -33137,7 +33141,8 @@ me.fireEvent('menutriggerout', me, me.menu, e);
 },
 enable: function(silent) {
 var me = this;
-me.callParent(arguments);
+if(!me.disabled) return me;
+me.callParent([silent]);
 me.removeClsWithUI('disabled');
 if (me.rendered) {
 me.el.dom.setAttribute('tabIndex', me.tabIndex);
@@ -33146,7 +33151,8 @@ return me;
 },
 disable: function(silent) {
 var me = this;
-me.callParent(arguments);
+if(me.disabled) return me;
+me.callParent([silent]);
 me.addClsWithUI('disabled');
 me.removeClsWithUI(me.overCls);
 if (me.rendered) {
@@ -51451,16 +51457,14 @@ this.getProxy().read(operation, callback, this);
 }
 },
 statics: {
-PREFIX : 'ext-record',
-AUTO_ID: 1,
+PREFIX : '',
+AUTO_ID: 0,
 EDIT   : 'edit',
 REJECT : 'reject',
 COMMIT : 'commit',
 id: function(rec) {
-var id = [this.PREFIX, '-', this.AUTO_ID++].join('');
 rec.phantom = true;
-rec.internalId = id;
-return id;
+return rec.internalId = ++this.AUTO_ID;
 }
 },
 idgen: {
@@ -51585,7 +51589,6 @@ values[fieldName] = newValue;
 values = fieldName;
 }
 for (name in values) {
-if (values.hasOwnProperty(name)) {
 value = values[name];
 if (fields && (field = fields.get(name)) && field.convert) {
 value = field.convert(value, me);
@@ -51619,17 +51622,17 @@ oldId = currentValue;
 newId = value;
 }
 }
-}
 if (single) {
 delete values[fieldName];
 }
 if (idChanged) {
 me.changeId(oldId, newId);
 }
-if (!me.editing && modifiedFieldNames) {
-me.afterEdit(modifiedFieldNames);
+if (modifiedFieldNames) {
+!me.editing && me.afterEdit(modifiedFieldNames);
+return modifiedFieldNames
 }
-return modifiedFieldNames || null;
+return null;
 },
 copyFrom: function(sourceRecord) {
 var me = this,
@@ -52765,6 +52768,8 @@ groupDir: "ASC",
 trailingBufferZone: 25,
 leadingBufferZone: 200,
 pageSize: undefined,
+totalCount: 0,
+snapshot: null,
 currentPage: 1,
 clearOnPageLoad: true,
 loading: false,
@@ -53446,7 +53451,7 @@ if (!options) {
 options = {};
 }
 if (me.buffered) {
-delete me.totalCount;
+me.totalCount = 0;
 me.data.clear(true);
 waitForReload = function() {
 if (me.rangeCached(startIdx, endIdx)) {
@@ -53524,7 +53529,7 @@ me.filters.replace(decoded[i]);
 filters = me.filters.items;
 if (filters.length) {
 if (me.remoteFilter) {
-delete me.totalCount;
+me.totalCount = 0;
 if (me.buffered) {
 me.data.clear();
 me.loadPage(1);
@@ -53553,7 +53558,7 @@ if (me.remoteFilter) {
 if (suppressEvent) {
 return;
 }
-delete me.totalCount;
+me.totalCount = 0;
 if (me.buffered) {
 me.data.clear();
 me.loadPage(1);
@@ -53563,7 +53568,7 @@ me.load();
 }
 } else if (me.isFiltered()) {
 me.data = me.snapshot;
-delete me.snapshot;
+me.snapshot = null;
 me.constructGroups();
 if (suppressEvent !== true) {
 me.fireEvent('datachanged', me);
@@ -53636,6 +53641,7 @@ loadData: function(data, append) {
 var length = data.length,
 newData = [],
 i;
+console.warn('Inefficient method `store.loadData()`! Open code it manually.');
 for (i = 0; i < length; i++) {
 newData.push(this.createModel(data[i]));
 }
@@ -53652,22 +53658,25 @@ me.loadRecords(records, append ? me.addRecordsOptions : undefined);
 },
 loadRecords: function(records, options) {
 var me     = this,
-i      = 0,
-length = records.length,
+i,
+length,
 start,
 addRecords,
-snapshot = me.snapshot;
+data;
 if (options) {
 start = options.start;
 addRecords = options.addRecords;
 }
 if (!addRecords) {
-delete me.snapshot;
+me.snapshot && (me.snapshot = null);
 me.clearData(true);
-} else if (snapshot) {
-snapshot.addAll(records);
+} else if ((data = me.snapshot)) {
+data.insert(data.length, records);
 }
-me.data.addAll(records);
+data = me.data;
+data.insert(data.length, records);
+length = records.length;
+i = 0;
 if (start !== undefined) {
 for (; i < length; i++) {
 records[i].index = start + i;
@@ -53767,7 +53776,7 @@ me.fireGroupChange();
 }
 }, operation;
 if (me.fireEvent('beforeload', me, options) !== false) {
-delete me.totalCount;
+me.totalCount = 0;
 me.loading = true;
 if (options.callback) {
 prefetchOptions = Ext.apply({}, options);
@@ -62254,6 +62263,11 @@ labelableRenderTpl: [
 '<div role="alert" aria-live="polite" id="{id}-errorEl" class="{errorMsgClass}" colspan="2" style="display:none"></div>',
 '{afterBodyEl}',
 '</td>',
+'<tpl else>',
+'</td>',
+'<td class="x-form-item-label">',
+'{afterBodyEl}',
+'</td>',
 '</tpl>',
 '</tr>',
 {
@@ -64178,6 +64192,8 @@ maxWidth: null,
 minHeight: null,
 maxHeight: null,
 constrain: true,
+width: void 0,
+height: void 0,
 cls: [Ext.baseCSSPrefix + 'message-box', Ext.baseCSSPrefix + 'hide-offsets'],
 layout: {
 type: 'vbox',
@@ -64319,11 +64335,12 @@ me.dockedItems = [me.bottomTb];
 me.on('close', me.onClose, me);
 me.callParent();
 },
+itemId: '',
 onClose: function(){
 var btn = this.header.child('[type=close]');
 btn.itemId = 'cancel';
 this.btnCallback(btn);
-delete btn.itemId;
+btn.itemId = '';
 },
 onPromptKey: function(textField, e) {
 var me = this;
@@ -64335,6 +64352,7 @@ me.msgButtons.yes.handler.call(me, me.msgButtons.yes);
 }
 }
 },
+defaultFocus: void 0,
 reconfigure: function(cfg) {
 var me = this,
 buttons = 0,
@@ -64363,9 +64381,10 @@ resizer.maxWidth = resizeTracker.maxWidth = me.maxWidth;
 resizer.minHeight = resizeTracker.minHeight = me.minHeight;
 resizer.maxHeight = resizeTracker.maxHeight = me.maxHeight;
 }
-delete me.defaultFocus;
 if (cfg.defaultFocus) {
 me.defaultFocus = cfg.defaultFocus;
+} else if(me.defaultFocus) {
+me.defaultFocus = void 0;
 }
 me.animateTarget = cfg.animateTarget || undefined;
 me.modal = cfg.modal !== false;
@@ -64381,8 +64400,7 @@ buttons = Ext.isNumber(cfg.buttons) ? cfg.buttons : 0;
 buttons = buttons | me.updateButtonText();
 me.buttonText = oldButtonText;
 Ext.suspendLayouts();
-delete me.width;
-delete me.height;
+me.width = me.height = void 0;
 if (width || height) {
 if (width) {
 me.setWidth(width);
@@ -64827,6 +64845,7 @@ record.set(obj);
 record.endEdit();
 return this;
 },
+_record: null,
 loadRecord: function(record) {
 this._record = record;
 return this.setValues(record.getData());
@@ -65024,7 +65043,7 @@ fields[f].reset();
 }
 Ext.resumeLayouts(true);
 if (resetRecord === true) {
-delete me._record;
+me._record = null;
 }
 return me;
 },
@@ -76737,7 +76756,7 @@ newCell = Ext.DomQuery.selectNode(cellSelector, newRowDom);
 if (isEditing) {
 Ext.fly(oldCell).syncContent(newCell);
 }
-else {
+else if(newCell) {
 row = oldCell.parentNode;
 row.insertBefore(newCell, oldCell);
 row.removeChild(oldCell);
@@ -87146,6 +87165,7 @@ me.currentLayout = null;
 layoutDone: function (layout) {
 var ownerContext = layout.ownerContext;
 layout.running = false;
+if (ownerContext) {
 if (layout.isComponentLayout) {
 if (ownerContext.measuresBox) {
 ownerContext.onBoxMeasured(); 
@@ -87153,6 +87173,7 @@ ownerContext.onBoxMeasured();
 ownerContext.setProp('done', true);
 } else {
 ownerContext.setProp('containerLayoutDone', true);
+}
 }
 --this.remainingLayouts;
 ++this.progressCount; 
