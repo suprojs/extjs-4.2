@@ -6015,7 +6015,7 @@ var noArgs = [],
     Ext.ns = Ext.namespace;
 
     Class.registerPreprocessor('className', function(cls, data) {
-        if ('$className' in data)
+        if ('$className' in data) {
             cls.$className = data.$className;
         }
         
