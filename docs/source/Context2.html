@@ -740,6 +740,7 @@ Ext.define('Ext.layout.Context', {
         layout.running = false;
 
         // Once a component layout completes, we can mark it as &quot;done&quot;.
+        if (ownerContext) {
         if (layout.isComponentLayout) {
             if (ownerContext.measuresBox) {
                 ownerContext.onBoxMeasured(); // be sure to release our boxParent
@@ -748,6 +749,7 @@ Ext.define('Ext.layout.Context', {
             ownerContext.setProp('done', true);
         } else {
             ownerContext.setProp('containerLayoutDone', true);
+        }
         }
 
         --this.remainingLayouts;

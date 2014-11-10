@@ -125476,6 +125476,7 @@ Ext.define('Ext.layout.Context', {
         layout.running = false;
 
         
+        if (ownerContext) {
         if (layout.isComponentLayout) {
             if (ownerContext.measuresBox) {
                 ownerContext.onBoxMeasured(); 
@@ -125484,6 +125485,7 @@ Ext.define('Ext.layout.Context', {
             ownerContext.setProp('done', true);
         } else {
             ownerContext.setProp('containerLayoutDone', true);
+        }
         }
 
         --this.remainingLayouts;
