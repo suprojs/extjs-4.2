@@ -1109,7 +1109,6 @@ Ext.define('Ext.data.Model', {
         }
 
         for (name in values) {
-            if (values.hasOwnProperty(name)) {
                 value = values[name];
 
                 if (fields &amp;&amp; (field = fields.get(name)) &amp;&amp; field.convert) {
@@ -1153,7 +1152,6 @@ Ext.define('Ext.data.Model', {
                     oldId = currentValue;
                     newId = value;
                 }
-            }
         }
 
         if (single) {
