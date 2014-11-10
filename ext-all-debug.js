@@ -44366,7 +44366,7 @@ Ext.define('Ext.data.AbstractStore', {
             }));
         }
         
-        return me;
+        return needsSync;
     },
     
     
