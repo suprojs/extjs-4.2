@@ -74944,6 +74944,7 @@ Ext.define('Ext.data.Store', {
             i;
 
         
+        console.warn('Inefficient method `store.loadData()`! Open code it manually.');
         for (i = 0; i < length; i++) {
             newData.push(this.createModel(data[i]));
         }

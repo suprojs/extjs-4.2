@@ -2008,6 +2008,7 @@ Ext.define('Ext.data.Store', {
             newData = [],
             i;
 
+        console.warn('Inefficient method `store.loadData()`! Open code it manually.');
         //make sure each data element is an Ext.data.Model instance
         for (i = 0; i &lt; length; i++) {
             newData.push(this.createModel(data[i]));
