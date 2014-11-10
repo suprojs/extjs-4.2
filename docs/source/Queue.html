@@ -126,6 +126,7 @@ Ext.define('Ext.fx.Queue', {
         }
         anim.on('afteranimate', function() {
             Ext.Array.remove(queue, anim);
+            me.removeAnim(anim);
             if (queue.length === 0) {
                 me.targets.remove(anim.target);
             }
