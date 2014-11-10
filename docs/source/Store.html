@@ -334,6 +334,10 @@ Ext.define('Ext.data.Store', {
      */
     pageSize: undefined,
 
+    totalCount: 0,
+
+    snapshot: null,
+
 <span id='Ext-data-Store-property-currentPage'>    /**
 </span>     * @property {Number} currentPage
      * The page that the Store has most recently loaded (see {@link #loadPage})
@@ -1581,7 +1585,7 @@ Ext.define('Ext.data.Store', {
         if (me.buffered) {
 
             // So that prefetchPage does not consider the store to be fully loaded if the local count is equal to the total count
-            delete me.totalCount;
+            me.totalCount = 0;
 
             // Clear cache (with initial flag so that any listening BufferedRenderer does not reset to page 1).
             me.data.clear(true);
@@ -1750,7 +1754,7 @@ Ext.define('Ext.data.Store', {
         if (filters.length) {
             if (me.remoteFilter) {
                 // So that prefetchPage does not consider the store to be fully loaded if the local count is equal to the total count
-                delete me.totalCount;
+                me.totalCount = 0;
 
                 // For a buffered Store, we have to clear the prefetch cache because the dataset will change upon filtering.
                 // Then we must prefetch the new page 1, and when that arrives, reload the visible part of the Store
@@ -1813,7 +1817,7 @@ Ext.define('Ext.data.Store', {
             }
 
             // So that prefetchPage does not consider the store to be fully loaded if the local count is equal to the total count
-            delete me.totalCount;
+            me.totalCount = 0;
 
             // For a buffered Store, we have to clear the prefetch cache because the dataset will change upon filtering.
             // Then we must prefetch the new page 1, and when that arrives, reload the visible part of the Store
@@ -1828,7 +1832,7 @@ Ext.define('Ext.data.Store', {
             }
         } else if (me.isFiltered()) {
             me.data = me.snapshot;
-            delete me.snapshot;
+            me.snapshot = null;
 
             // Groups will change when filters change
             me.constructGroups();
@@ -2054,7 +2058,7 @@ Ext.define('Ext.data.Store', {
         }
 
         if (!addRecords) {
-            delete me.snapshot;
+            me.snapshot = null;
             me.clearData(true);
         } else if (snapshot) {
             snapshot.addAll(records);
@@ -2227,7 +2231,7 @@ Ext.define('Ext.data.Store', {
         if (me.fireEvent('beforeload', me, options) !== false) {
 
             // So that prefetchPage does not consider the store to be fully loaded if the local count is equal to the total count
-            delete me.totalCount;
+            me.totalCount = 0;
 
             me.loading = true;
 

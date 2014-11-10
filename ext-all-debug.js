@@ -73717,6 +73717,10 @@ Ext.define('Ext.data.Store', {
     pageSize: undefined,
 
     
+    totalCount: 0,
+
+    snapshot: null,
+
     currentPage: 1,
 
     
@@ -74650,7 +74654,7 @@ Ext.define('Ext.data.Store', {
         if (me.buffered) {
 
             
-            delete me.totalCount;
+            me.totalCount = 0;
 
             
             me.data.clear(true);
@@ -74770,7 +74774,7 @@ Ext.define('Ext.data.Store', {
         if (filters.length) {
             if (me.remoteFilter) {
                 
-                delete me.totalCount;
+                me.totalCount = 0;
 
                 
                 
@@ -74820,7 +74824,7 @@ Ext.define('Ext.data.Store', {
             }
 
             
-            delete me.totalCount;
+            me.totalCount = 0;
 
             
             
@@ -74835,7 +74839,7 @@ Ext.define('Ext.data.Store', {
             }
         } else if (me.isFiltered()) {
             me.data = me.snapshot;
-            delete me.snapshot;
+            me.snapshot = null;
 
             
             me.constructGroups();
@@ -74974,7 +74978,7 @@ Ext.define('Ext.data.Store', {
         }
 
         if (!addRecords) {
-            delete me.snapshot;
+            me.snapshot = null;
             me.clearData(true);
         } else if (snapshot) {
             snapshot.addAll(records);
@@ -75127,7 +75131,7 @@ Ext.define('Ext.data.Store', {
         if (me.fireEvent('beforeload', me, options) !== false) {
 
             
-            delete me.totalCount;
+            me.totalCount = 0;
 
             me.loading = true;
 
