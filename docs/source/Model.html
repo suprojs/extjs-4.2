@@ -679,13 +679,13 @@ Ext.define('Ext.data.Model', {
          * @static
          * @private
          */
-        PREFIX : 'ext-record',
+        PREFIX : '',
 <span id='Ext-data-Model-static-property-AUTO_ID'>        /**
 </span>         * @property
          * @static
          * @private
          */
-        AUTO_ID: 1,
+        AUTO_ID: 0,
 <span id='Ext-data-Model-static-property-EDIT'>        /**
 </span>         * @property
          * @static
@@ -719,10 +719,8 @@ Ext.define('Ext.data.Model', {
          * @static
          */
         id: function(rec) {
-            var id = [this.PREFIX, '-', this.AUTO_ID++].join('');
             rec.phantom = true;
-            rec.internalId = id;
-            return id;
+            return rec.internalId = ++this.AUTO_ID;
         }
     },
 

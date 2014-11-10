@@ -71776,9 +71776,9 @@ Ext.define('Ext.data.Model', {
 
     statics: {
         
-        PREFIX : 'ext-record',
+        PREFIX : '',
         
-        AUTO_ID: 1,
+        AUTO_ID: 0,
         
         EDIT   : 'edit',
         
@@ -71788,10 +71788,8 @@ Ext.define('Ext.data.Model', {
 
         
         id: function(rec) {
-            var id = [this.PREFIX, '-', this.AUTO_ID++].join('');
             rec.phantom = true;
-            rec.internalId = id;
-            return id;
+            return rec.internalId = ++this.AUTO_ID;
         }
     },
 
