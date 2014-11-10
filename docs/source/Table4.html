@@ -1679,7 +1679,7 @@ Ext.define('Ext.view.Table', {
                     Ext.fly(oldCell).syncContent(newCell);
                 }
                 // Otherwise, we simply replace whole TDs with a new version
-                else {
+                else if(newCell) {
                     // Use immediate parentNode when replacing in case the main row was a wrapping row
                     row = oldCell.parentNode;
                     row.insertBefore(newCell, oldCell);
