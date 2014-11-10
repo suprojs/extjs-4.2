@@ -5246,6 +5246,9 @@ var noArgs = [],
                 from = rewrite.from;
                 to = rewrite.to;
 
+                if(!name) throw new Error(
+                    '`namespace` is undefined see console for "xtype"'
+                )
                 if (name === from || name.substring(0, from.length) === from) {
                     name = name.substring(from.length);
 
@@ -5903,6 +5906,7 @@ var noArgs = [],
 
             
             if (!className) {
+                console.warn('`xtype` is undefined: ' + xtype)
                 load = true;
             }
 
@@ -35849,6 +35853,7 @@ Ext.define('Ext.layout.Layout', {
 
                 
                 if (!className) {
+                    console.warn('`type` is undefined: ' + type)
                     load = true;
                 }
                 
