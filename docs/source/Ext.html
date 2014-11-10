@@ -38,7 +38,6 @@ Ext._startTime = new Date().getTime();
             return method.$owner.prototype[method.$name].apply(this, arguments);
         },
         i,
-        nonWhitespaceRe = /\S/,
         ExtApp,
         iterableRe = /\[object\s*(?:Array|Arguments|\w*Collection|\w*List|HTML\s+document\.all\s+class)\]/;
 
@@ -397,7 +396,7 @@ Ext._startTime = new Date().getTime();
             if (type === 'object') {
                 if (value.nodeType !== undefined) {
                     if (value.nodeType === 3) {
-                        return (nonWhitespaceRe).test(value.nodeValue) ? 'textnode' : 'whitespace';
+                        return /\S/.test(value.nodeValue) ? 'textnode' : 'whitespace';
                     }
                     else {
                         return 'element';
