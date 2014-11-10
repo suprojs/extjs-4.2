@@ -90965,6 +90965,7 @@ Ext.define('Ext.form.Basic', {
         return this;
     },
 
+    _record: null,
     
     loadRecord: function(record) {
         this._record = record;
@@ -91224,7 +91225,7 @@ Ext.define('Ext.form.Basic', {
         Ext.resumeLayouts(true);
         
         if (resetRecord === true) {
-            delete me._record;
+            me._record = null;
         }
         return me;
     },

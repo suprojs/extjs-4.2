@@ -719,6 +719,8 @@ Ext.define('Ext.form.Basic', {
         return this;
     },
 
+    _record: void 0,
+
 <span id='Ext-form-Basic-method-loadRecord'>    /**
 </span>     * Loads an {@link Ext.data.Model} into this form by calling {@link #setValues} with the
      * {@link Ext.data.Model#raw record data}.
@@ -1059,7 +1061,7 @@ Ext.define('Ext.form.Basic', {
         Ext.resumeLayouts(true);
         
         if (resetRecord === true) {
-            delete me._record;
+            me._record = void 0;
         }
         return me;
     },
