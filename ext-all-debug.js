@@ -42406,6 +42406,9 @@ Ext.define('Ext.data.StoreManager', {
 
     
     lookup : function(store) {
+        if ('string' == typeof store) {
+            return this.get(store);
+        }
         
         if (Ext.isArray(store)) {
             var fields = ['field1'], 
@@ -42431,11 +42434,6 @@ Ext.define('Ext.data.StoreManager', {
                 autoCreated: true,
                 expanded: expand
             });
-        }
-        
-        if (Ext.isString(store)) {
-            
-            return this.get(store);
         } else {
             
             return Ext.data.AbstractStore.create(store);

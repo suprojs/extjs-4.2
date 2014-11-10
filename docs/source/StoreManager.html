@@ -83,6 +83,9 @@ Ext.define('Ext.data.StoreManager', {
      * @return {Ext.data.Store}
      */
     lookup : function(store) {
+        if ('string' == typeof store) {
+            return this.get(store);// store id
+        }
         // handle the case when we are given an array or an array of arrays.
         if (Ext.isArray(store)) {
             var fields = ['field1'], 
@@ -108,11 +111,6 @@ Ext.define('Ext.data.StoreManager', {
                 autoCreated: true,
                 expanded: expand
             });
-        }
-        
-        if (Ext.isString(store)) {
-            // store id
-            return this.get(store);
         } else {
             // store instance or store config
             return Ext.data.AbstractStore.create(store);
