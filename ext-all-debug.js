@@ -74967,11 +74967,11 @@ Ext.define('Ext.data.Store', {
     
     loadRecords: function(records, options) {
         var me     = this,
-            i      = 0,
-            length = records.length,
+            i,
+            length,
             start,
             addRecords,
-            snapshot = me.snapshot;
+            data;
 
         if (options) {
             start = options.start;
@@ -74979,13 +74979,16 @@ Ext.define('Ext.data.Store', {
         }
 
         if (!addRecords) {
-            me.snapshot = null;
+            me.snapshot && (me.snapshot = null);
             me.clearData(true);
-        } else if (snapshot) {
-            snapshot.addAll(records);
+        } else if ((data = me.snapshot)) {
+            data.insert(data.length, records);
         }
+        data = me.data;
+        data.insert(data.length, records);
 
-        me.data.addAll(records);
+        length = records.length;
+        i = 0;
 
         if (start !== undefined) {
             for (; i < length; i++) {
