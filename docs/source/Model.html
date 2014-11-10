@@ -1164,11 +1164,12 @@ Ext.define('Ext.data.Model', {
             me.changeId(oldId, newId);
         }
 
-        if (!me.editing &amp;&amp; modifiedFieldNames) {
-            me.afterEdit(modifiedFieldNames);
+        if (modifiedFieldNames) {
+            !me.editing &amp;&amp; me.afterEdit(modifiedFieldNames);
+            return modifiedFieldNames
         }
 
-        return modifiedFieldNames || null;
+        return null;
     },
 
 <span id='Ext-data-Model-method-copyFrom'>    /**

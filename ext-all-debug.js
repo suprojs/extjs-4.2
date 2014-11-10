@@ -72063,11 +72063,12 @@ Ext.define('Ext.data.Model', {
             me.changeId(oldId, newId);
         }
 
-        if (!me.editing && modifiedFieldNames) {
-            me.afterEdit(modifiedFieldNames);
+        if (modifiedFieldNames) {
+            !me.editing && me.afterEdit(modifiedFieldNames);
+            return modifiedFieldNames
         }
 
-        return modifiedFieldNames || null;
+        return null;
     },
 
     
