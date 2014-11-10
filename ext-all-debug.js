@@ -21289,6 +21289,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         
         syncContent: function(source) {
             source = Ext.getDom(source);
+            if(!source) return;
             var sourceNodes = source.childNodes,
                 sourceLen = sourceNodes.length,
                 dest = this.dom,
