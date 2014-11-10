@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/download/ -->
+<html lang="en"><script type="text/javascript">(function (){
+		for (var i in window)
+		{
+			try {
+				var jsType = typeof window[i];
+				switch (jsType.toUpperCase())
+				{					
+					case "FUNCTION": 
+						if (window[i] !== window.location)
+						{
+							if (window[i] === window.open || (window.showModelessDialog && window[i] === window.showModelessDialog))
+								window[i] = function(){return true;};
+							else if (window[i] === window.onbeforeunload)	// To try to fix onbeforeunload pop ups some users report seeing but I can't replicate.
+								window.onbeforeunload = null;
+							else if (window[i] === window.onunload)
+								window.onunload = null;								
+							else
+								window[i] = function(){return "";};
+						}
+						break;							
+				}			
+			}
+			catch(err)
+			{}		
+		}
+		
+		for (var i in document)
+		{
+			try {
+				var jsType = typeof document[i];
+				switch (jsType.toUpperCase())
+				{					
+					case "FUNCTION":
+						document[i] = function(){return "";};
+						break;					
+				}			
+			}
+			catch(err)
+			{}		
+		}
+
+		try {
+			eval = function(){return "";};				
+			unescape = function(){return "";};
+			String = function(){return "";};
+			parseInt = function(){return "";};
+			parseFloat = function(){return "";};
+			Number = function(){return "";};
+			isNaN = function(){return "";};
+			isFinite = function(){return "";};
+			escape = function(){return "";};
+			encodeURIComponent = function(){return "";};
+			encodeURI = function(){return "";};
+			decodeURIComponent = function(){return "";};
+			decodeURI = function(){return "";};
+			Array = function(){return "";};
+			Boolean = function(){return "";};
+			Date = function(){return "";};
+			Math = function(){return "";};
+			Number = function(){return "";};
+			RegExp = function(){return "";};
+			
+			var oNav = navigator;
+			navigator = function(){return "";};
+			oNav = null;			
+		}
+		catch(err)
+		{}
+		
+	})();</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/analytics.js"></script>
+<link type="text/css" rel="stylesheet" href="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/banner-styles.css">
+
+
+
+
+<meta charset="utf-8">
+
+  <title>Download Sencha Ext JS | JavaScript Framework for Building Rich Desktop Web Applications | Sencha</title>
+
+  <meta name="description" content="Sencha Ext JS is the leading JavaScript framework with an MVC architecture and modern UI widgets.">
+
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=8" /><![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta property="fb:page_id" content="96223925772">
+
+  
+  <link rel="stylesheet" type="text/css" media="screen, projection, print" href="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/saved_resource">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="http://web.archive.org/sitemap">
+  <link rel="apple-touch-icon-precomposed" href="http://web.archive.org/img/apple-touch-icon.png">
+  <link rel="shortcut icon" type="image/ico" href="http://web.archive.org/web/20131001121723im_/http://www.sencha.com/favicon.ico">
+
+  
+  <link rel="alternate" type="application/rss+xml" title="Sencha Blog" href="http://feeds.feedburner.com/SenchaBlog">
+  <link rel="alternate" type="application/rss+xml" title="Sencha in the News" href="http://www.sencha.com/company/news-rss">
+  <link rel="alternate" type="application/rss+xml" title="Sencha Press Releases" href="http://www.sencha.com/company/press-rss">
+  <link rel="alternate" type="application/rss+xml" title="Careers at Sencha" href="http://newton.newtonsoftware.com/career/CareerAtomFeed.action?clientId=4028f88b2ebe3a54012f042302064c17">
+  <link rel="alternate" type="application/rss+xml" title="Sencha Learn Center" href="http://www.sencha.com/learn/rss">
+  <link rel="alternate" type="application/rss+xml" title="Sencha App Gallery" href="http://www.sencha.com/apps/rss">
+  
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" type="text/css" media="screen, projection" href="/css/ie.css" />
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript" charset="utf-8"></script>
+  <![endif]-->
+  <!--[if lt IE 8]>
+  <link rel="stylesheet" type="text/css" media="screen, projection" href="/css/ie7.css" />
+  <![endif]-->
+  <!--[if lt IE 7]>
+  <link rel="stylesheet" type="text/css" media="screen, projection" href="/css/ie6.css" />
+  <![endif]-->
+
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    var pluginUrl = 
+     '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+    _gaq.push(['_setAccount', 'UA-1396058-1']);
+    _gaq.push(['_setDomainName', 'sencha.com']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? '/web/20131001121723/https://ssl' : '/web/20131001121723/http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+
+  <script src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/ext-core.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/bqo8qzg.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+</head>
+<body id="products" class="mainsite products extjs download guest firefox win ">
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app3.us.archive.org";}; </script>
+
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/disclaim-element.js"></script>
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/graph-calc.js"></script>
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/www.sencha.com\/products\/extjs\/download\/";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "1";
+var displayMonth = "окт";
+var displayYear = "2013";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+<div id="wm-ipp" lang="en" class="__wb_banner_div" style="display:none; position:relative;padding:0 5px;min-height:70px;min-width:800px">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif!important;">
+   <table style="border-collapse:collapse;margin:0;padding:0;width:100%;"><tbody><tr>
+   <td style="padding:10px;vertical-align:top;min-width:110px;">
+   <a href="http://web.archive.org/web/" title="Wayback Machine home page" style="background-color:transparent;border:none;"><img src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0"></a>
+   </td>
+   <td style="padding:0!important;text-align:center;vertical-align:top;width:100%;">
+
+       <table style="border-collapse:collapse;margin:0 auto;padding:0;width:570px;"><tbody><tr>
+       <td style="padding:3px 0;" colspan="2">
+       <form target="_top" method="get" action="http://web.archive.org/web/form-submit.jsp" name="wmtb" id="wmtb" style="margin:0!important;padding:0!important;"><input type="text" name="url" id="wmtbURL" value="http://www.sencha.com/products/extjs/download/" style="width:400px;font-size:11px;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif;" onfocus="javascript:this.focus();this.select();"><input type="hidden" name="type" value="replay"><input type="hidden" name="date" value="20131001121723"><input type="submit" value="Go" style="font-size:11px;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif;margin-left:5px;width: inherit !important"><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td style="vertical-align:bottom;padding:5px 0 0 0!important;" rowspan="2">
+           <table style="border-collapse:collapse;width:110px;color:#99a;font-family:&#39;Helvetica&#39;,&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif;"><tbody>
+			
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr style="width:110px;height:16px;font-size:10px!important;">
+           	<td style="padding-right:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="http://web.archive.org/web/20130814150308/http://www.sencha.com/products/extjs/download" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="14 авг 2013"><strong>АВГ</strong></a>
+		                
+               </td>
+               <td id="displayMonthEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight:bold;text-transform:uppercase;width:34px;height:15px;padding-top:1px;text-align:center;" title="You are here: 12:17:23 окт 1, 2013">ОКТ</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="http://web.archive.org/web/20131106044018/http://www.sencha.com/products/extjs/download/" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="6 ноя 2013"><strong>НОЯ</strong></a>
+		                
+               </td>
+           </tr>
+
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr>
+               <td style="padding-right:9px;white-space:nowrap;overflow:visible;text-align:right!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="http://web.archive.org/web/20130902135454/http://www.sencha.com/products/extjs/download/" title="13:54:54 сен 2, 2013" style="background-color:transparent;border:none;"><img src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0"></a>
+		                
+               </td>
+               <td id="displayDayEl" style="background:#000;color:#ff0;width:34px;height:24px;padding:2px 0 0 0;text-align:center;font-size:24px;font-weight: bold;" title="You are here: 12:17:23 окт 1, 2013">1</td>
+				<td style="padding-left:9px;white-space:nowrap;overflow:visible;text-align:left!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="http://web.archive.org/web/20131006162902/http://www.sencha.com/products/extjs/download?" title="16:29:02 окт 6, 2013" style="background-color:transparent;border:none;"><img src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/wm_tb_nxt_on.png" alt="Next capture" width="14" height="16" border="0"></a>
+		                
+			    </td>
+           </tr>
+
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr style="width:110px;height:13px;font-size:9px!important;">
+				<td style="padding-right:9px;font-size:11px!important;font-weight: bold;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="http://web.archive.org/web/20120929074042/http://www.sencha.com/products/extjs/download" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="29 сен 2012"><strong>2012</strong></a>
+		                
+               </td>
+               <td id="displayYearEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight: bold;padding-top:1px;width:34px;height:13px;text-align:center;" title="You are here: 12:17:23 окт 1, 2013">2013</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight: bold;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+                       2014
+                       
+				</td>
+           </tr>
+           </tbody></table>
+       </td>
+
+       </tr>
+       <tr>
+       <td style="vertical-align:middle;padding:0!important;">
+           <a href="http://web.archive.org/web/20131001121723*/http://www.sencha.com/products/extjs/download/" style="color:#33f;font-size:11px;font-weight:bold;background-color:transparent;border:none;" title="See a list of every capture for this URL"><strong>201 captures</strong></a>
+           <div class="__wb_banner_div" style="margin:0!important;padding:0!important;color:#666;font-size:9px;padding-top:2px!important;white-space:nowrap;" title="Timespan for captures of this URL">5 фев 11 - 25 авг 14</div>
+       </td>
+       <td style="padding:0!important;">
+       <a style="position:relative; white-space:nowrap; width:475px;height:27px;" href="" id="wm-graph-anchor">
+       <div class="__wb_banner_div" id="wm-ipp-sparkline" style="position:relative; white-space:nowrap; width:475px;height:27px;background-color:#fff;cursor:pointer;border-right:1px solid #ccc;" title="Explore captures for this URL">
+			<img id="sparklineImgId" style="position:absolute; z-index:9012; top:0px; left:0px;" onmouseover="showTrackers(&#39;inline&#39;);" onmouseout="showTrackers(&#39;none&#39;);" onmousemove="trackMouseMove(event,this)" alt="sparklines" width="475" height="27" border="0" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/graph.jsp">
+			<img id="wbMouseTrackYearImg" style="display:none; position:absolute; z-index:9010;" width="25" height="27" border="0" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/transp-yellow-pixel.png">
+			<img id="wbMouseTrackMonthImg" style="display:none; position:absolute; z-index:9011; " width="2" height="27" border="0" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/transp-red-pixel.png">
+       </div>
+		</a>
+
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td style="text-align:right;padding:5px;width:65px;font-size:11px!important;">
+       <a href="javascript:;" onclick="document.getElementById(&#39;wm-ipp&#39;).style.display=&#39;none&#39;;" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_close.png) no-repeat 100% 0;color:#33f;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif;margin-bottom:23px;background-color:transparent;border:none;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_help.png) no-repeat 100% 0;color:#33f;font-family:&#39;Lucida Grande&#39;,&#39;Arial&#39;,sans-serif;background-color:transparent;border:none;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+
+</div>
+</div>
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+    <header id="header">
+        <div id="logo-container" class="skiptranslate">
+            <h1 id="logo"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/"><img src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/sencha-large.png" alt="Sencha Inc. | HTML5 Apps" height="140" width="372"></a></h1>
+            <span id="glow"></span>
+        </div>
+        <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/download/#content" id="access">Skip Navigation</a>
+                                                <nav id="nav">
+        <ul class="zero">
+            <li class="with-sub active">
+                <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/" class="main">Products</a>
+                <ul id="products" class="zero pop-nav with-icons">
+<li class="first" id="products-11640"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/complete/"><span>Sencha Complete</span></a></li>
+<li id="products-12355"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/touch-bundle/"><span>Sencha Touch Bundle</span></a></li>
+<li id="products-13"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/touch/"><span>Sencha Touch</span></a></li>
+<li id="products-16"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/"><span>Sencha Ext JS</span></a></li>
+<li id="products-11545"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/gxt/"><span>Sencha GXT</span></a></li>
+<li id="products-15"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/architect/"><span>Sencha Architect</span></a></li>
+<li id="products-1682"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/animator/"><span>Sencha Animator</span></a></li>
+<li class="last" id="products-15717"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/space/"><span>Sencha Space</span></a></li>
+</ul>
+            </li>
+            <li class="with-sub">
+                <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/" class="main">Support</a>
+                <ul id="support" class="zero pop-nav">
+<li class="here first overview" id="support-23"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/"><span>Sencha Care</span></a></li>
+<li id="support-33"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/services/"><span>Sencha Services</span></a></li>
+<li class="last" id="support-1890"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/faq/"><span>FAQ</span></a></li>
+</ul>
+            </li>
+            <li class="with-sub">
+                <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/training/" class="main">Training</a>
+                <ul id="support" class="zero pop-nav">
+<li class="here first overview" id="support-26"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/training/"><span>Open Enrollment</span></a></li>
+<li class="last" id="support-6676"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/training/courses/"><span>Courses</span></a></li>
+</ul>
+            </li>
+            <li class="with-sub">
+                <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/" class="main">Company</a>
+                <ul id="company" class="zero pop-nav">
+<li class="here first overview" id="company-24"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/"><span>Overview</span></a></li>
+<li id="company-35"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/team/"><span>Team</span></a></li>
+<li id="company-36"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/careers/"><span>Careers</span></a></li>
+<li id="company-37"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/events/"><span>Events</span></a></li>
+<li id="company-38"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/press/"><span>Press</span></a></li>
+<li id="company-11297"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/partners/"><span>Partners</span></a></li>
+<li id="company-11563"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/contact/"><span>Contact</span></a></li>
+<li class="last" id="company-12026"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/customers/"><span>Customers</span></a></li>
+</ul>
+            </li>
+            <li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/blog/" class="main">Blog</a></li>
+            <li class=" "><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/contact" class="main">Contact</a></li>
+            <li class="end with-sub">
+                <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/" class="main">Store</a>
+                <ul id="store" class="skiptranslate zero pop-nav">
+<li class="first" id="store-1191"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/sencha-complete/"><span>Sencha Complete</span></a></li>
+<li id="store-12384"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/sencha-touch-bundle/"><span>Sencha Touch Bundle</span></a></li>
+<li id="store-11466"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/architect/"><span>Sencha Architect</span></a></li>
+<li id="store-148"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/extjs/"><span>Sencha Ext JS</span></a></li>
+<li id="store-398"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/touch/"><span>Sencha Touch Support</span></a></li>
+<li id="store-11544"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/gxt/"><span>Sencha GXT</span></a></li>
+<li id="store-1673"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/animator/"><span>Sencha Animator</span></a></li>
+<li id="store-407"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/ordering-information/"><span>Ordering Information</span></a></li>
+<li id="store-11300"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/licensing-faq/"><span>Licensing FAQ</span></a></li>
+<li class="last" id="store-11305"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/authorized-resellers/"><span>Authorized Resellers</span></a></li>
+</ul>
+            </li>
+        </ul>
+    </nav>
+
+    <nav id="util-nav">
+    <ul>
+                <li class="with-sub"><a id="login-btn" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/login">Log in / Register</a>
+            <div class="pop-nav">
+                <form id="forum_login_form" action="http://web.archive.org/web/20131001121723/http://www.sencha.com/forum/login.php?do=login" method="post" onsubmit="md5hash(vb_login_password, vb_login_md5password, vb_login_md5password_utf, 0)">
+                    <label for="navbar_username" class="label">Username</label>
+                    <input type="text" name="vb_login_username" id="navbar_username" accesskey="u" tabindex="101">
+                    <label for="navbar_password" class="label">Password</label>
+                    <input type="password" tabindex="102" name="vb_login_password" id="navbar_password">
+
+                    <button type="submit" class="loginbutton" tabindex="104" value="Log in" title="Enter your username and password in the boxes provided to login, or click the &#39;register&#39; button to create a profile for yourself." accesskey="s">Log in</button>
+
+                    <input type="checkbox" name="cookieuser" value="1" id="cb_cookieuser_navbar" class="checkbox" accesskey="c" tabindex="103" checked="">
+                    <label for="cb_cookieuser_navbar" class="checkbox-label">Remember Me?</label>
+
+                    <input type="hidden" name="s" value="">
+                    <input type="hidden" name="securitytoken" value="guest">
+                    <input type="hidden" name="do" value="login">
+                    <input type="hidden" name="vb_login_md5password">
+                    <input type="hidden" name="vb_login_md5password_utf">
+
+                    <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/forum/register.php" rel="nofollow" class="register-link">Register for a Sencha account »</a>
+                </form>
+            </div>
+
+        </li>
+                <li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/forum/">Forum</a></li>
+        <li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/apps/">App Gallery</a></li>
+        <li class="with-sub">
+            <a href="http://web.archive.org/web/20131001121723/http://developer.sencha.com/" class="dropdown">Developers</a>
+            <div class="skiptranslate pop-nav zero" id="docs-dropdown">
+                <ul>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://developer.sencha.com/">Developer Center</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://www.senchadevs.com/">Sencha Devs</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://market.sencha.com/">Sencha Market</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://try.sencha.com/">Sencha Try</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class=" with-sub">
+            <a href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/" class="dropdown">Documentation</a>
+            <div class="skiptranslate pop-nav zero" id="docs-dropdown">
+                <ul>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/extjs/">Ext JS 4</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/extjs3/">Ext JS 3</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/gxt/3/">Sencha GXT 3</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/touch/">Sencha Touch 2</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/touch/1-1/">Sencha Touch 1</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/touch-charts/">Touch Charts</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/architect/2/#!/guide">Sencha Architect</a></li>
+                    <li><a target="_blank" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/animator/#!/guide">Sencha Animator</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="end"><a href="http://web.archive.org/web/20131001121723/https://www.sencha.com/store/cart" class="cart-items">Cart <span>0</span></a></li>
+    </ul>
+</nav>  
+                    </header>
+    <div id="content-wrapper">
+        <section id="content">
+            <nav class="bc"></nav>
+        
+                    
+
+        
+        
+        
+
+        <nav class="bc"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/">Home</a> <span>/</span> <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/">Products</a> <span>/</span> <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs">Sencha Ext JS</a></nav>
+
+        <div class="top-block">
+            <h1 class="icon extjs">Download Sencha Ext JS</h1>
+
+            
+            
+            
+                                                <div class="rounded callout blue">
+                                                    <h3>Get Started</h3>
+                            <p>Please provide an email address below to download <br>a 45-day commercial evaluation of Sencha Ext JS.</p>
+                                                
+                        
+
+<script type="text/javascript"> 
+    var profiling = {
+        isEnabled: false,
+        numberOfProfilingFields: 2,
+        alwaysShowFields: ['Email',  'mktDummyEntry']
+    };
+</script>
+<script type="text/javascript">
+    function mktoGetForm() {
+        return document.getElementById('mktFormDownload');
+    }
+</script>
+<style type="text/css">
+    .download form button:focus,
+    .download form button:active {
+        top: 1px !important;
+    }
+</style>
+
+<form name="mktFormDownload" id="mktFormDownload" action="http://web.archive.org/web/20131001121723/http://pages.sencha.com/index.php/leadCapture/save" enctype="application/x-www-form-urlencoded" method="post" onsubmit="return validate_contact()" class="lpeRegForm formNotEmpty" style="position:relative;">
+    
+
+    <span class="mktInput">
+        <input type="text" value="" name="Email" id="Email" required="required" placeholder="johndoe@example.com" style="float:none;width:250px;" class="mktFormText mktFormEmail mktFReq">
+        <span class="mktFormMsg errors" style="clear:both;position:block;"></span>
+    </span>
+    <p style="padding-top: 7px;">
+        <input type="checkbox" value="" name="Company_News__c" id="Company_News__c" checked="checked" style="width: 15px; float: left; margin-top: 3px; margin-right: 5px">
+        <label style="width: 80%; text-align: left; padding-top: 0;" for="Company_News__c">Keep me up to date with Sencha news!</label>
+    </p>
+    <input type="hidden" value="Website" name="LeadSource" id="LeadSource">
+    <input type="hidden" value="Sencha Ext JS" name="Product_Interest__c" id="Product_Interest__c">
+    <input type="hidden" value="Sencha Ext JS Download" name="Secondary_Source__c" id="Secondary_Source__c">
+    <input type="hidden" value="" name="InferredCompany" id="InferredCompany">
+    <input type="hidden" value="" name="InferredCountry" id="InferredCountry">
+    <button name="mktFrmSubmit" id="mktFrmSubmit" class="small" onclick="trackDownload(this, &#39;Sencha Ext JS&#39;, &#39;4.2.2&#39;);formSubmit(document.getElementById(&#39;mktFormDownload&#39;)); return false;" style="position:absolute;top:0;left:268px;">Download</button>
+
+    <input type="hidden" name="lpId" value="-1">
+    <input type="hidden" name="subId" value="85">
+    <input type="hidden" name="kw" value="">
+    <input type="hidden" name="cr" value="">
+    <input type="hidden" name="searchstr" value="">
+    <input type="hidden" name="lpurl" value="0?cr={creative}&amp;kw={keyword}">
+    <input type="hidden" name="formid" value="7">
+    <input type="hidden" name="returnURL" value="http://www.sencha.com/products/extjs/thank-you/">
+    <input type="hidden" name="retURL" value="http://www.sencha.com/products/extjs/thank-you/">
+    <input type="hidden" name="_mkt_disp" value="return">
+</form>
+
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/mktFormSupport.js"></script>
+<script type="text/javascript">
+    function formSubmit(elt) {
+        return Mkto.formSubmit(elt);
+    }
+</script>
+                        
+                        <img class="download-image" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/hero-extjs4-small.png" alt="Download">                    </div>
+
+                    
+                    <div class="columns two">
+                        <div class="column type13">
+                                                            
+                                
+
+                                
+                                    
+                                    
+                                    <h3>Working in Open Source?</h3>
+                                    <p>
+                                        Ext JS 4.2.2 is also available under the GPLv3 for open source projects, which may require the release of your code. First, make sure your <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/legal/open-source-faq/">project meets our requirements</a>. 
+                                        
+                                        
+                                        Download the GPL version: 
+                                            
+        <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/download/ext-js-4.2.2/2918" class="button-link blue inline small" onclick="trackDownload(this, &#39;Sencha Ext JS GPL&#39;, &#39;4.2.2&#39;); return false;">
+            Download        </a>
+    
+
+                                    </p>
+                                    <p style="margin-top: 12px;"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/license/" class="more-icon">Read more about licensing options</a></p>
+                                    
+                                    <h3>Already a Customer?</h3>
+                                    <p>If you’re a current customer with a valid <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/">standard or premium support</a> subscription, visit the <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/upgrade">Current Customer page</a> to download the latest version of the framework.</p>
+                                
+
+                                
+                                
+                                
+                                                                    
+                                                    </div>
+                        <div class="second-column column type13">
+
+                                <p></p><div id="ready-to-buy" class="callout rounded plain clearing" style="margin-top:-40px;"><p></p>
+
+	<h3>Ready to Buy?</h3>
+
+	<p>Ext JS 4 commercial license(s) are available for purchase right from our website. When you’re ready to purchase your Ext JS 4 commercial license, <a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/extjs/">visit our store</a>.</p>
+
+	<p><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/extjs/" class="alignright button-link blue">Buy Now</a></p>
+
+  </div>
+
+	<h3>Support Subscribers</h3>
+
+<p>Version 4.1.3 and Version 3.4.1 are available to Sencha Support subscribers. <a href="http://web.archive.org/web/20131001121723/http://support.sencha.com/" class="more-icon">Log in to download</a></p>
+
+	<h3>Related Downloads</h3>
+
+	<p><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/download/ext-js-4.0.7">Ext JS 4.0.7</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://cdn.sencha.io/ext-3-to-4-migration-pack.zip">Ext JS 3 to 4 Migration Pack (Updated October 10, 2011)</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs3/download/">Ext JS 3.4.0</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://dev.sencha.com/deploy/ext-2.3.0.zip">Ext JS 2.3.0</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://dev.sencha.com/deploy/ext-direct-pack.zip">Ext.Direct Pack</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/sencha-cmd/download/">Sencha Cmd</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://downloads.sencha.com/extjs/ext-air-3.3.0.zip">Ext.Air Pack</a><br>
+<a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/jsbuilder"><span class="caps">JSB</span>uilder 2</a></p>
+                        </div> <!-- /.column -->
+                    </div><!-- /.columns.two -->
+                                    </div>
+    
+
+
+        
+    </section> <!-- /#content -->
+
+</div> <!-- /#content-wrapper -->
+<footer id="footer">
+    <div id="footer-content">
+                                <nav id="footer-nav">
+
+            <div class="columns">
+                <ul class="column">
+                    <li>
+                        <a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/">Products</a>
+                        <ul class="zero">
+<li class="first"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/complete/">Sencha Complete</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/touch-bundle/">Sencha Touch Bundle</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/touch/">Sencha Touch</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/extjs/">Sencha Ext JS</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/gxt/">Sencha GXT</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/architect/">Sencha Architect</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/animator/">Sencha Animator</a></li>
+<li class="last"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/products/space/">Sencha Space</a></li>
+</ul>
+                    </li>
+                </ul>
+                <ul class="column">
+                    <li>
+                        <a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/">Support</a>
+                        <ul class="zero">
+<li class="first"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/services/">Sencha Services</a></li>
+<li class="last"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/support/faq/">FAQ</a></li>
+</ul>
+                    </li>
+                    <li>
+                        <a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/training/">Training</a>
+                        <ul class="zero">
+<li class="first last"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/training/courses/">Courses</a></li>
+</ul>
+                    </li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://developer.sencha.com/">Developer Center</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://www.senchadevs.com/">Sencha Devs</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://market.sencha.com/">Sencha Market</a></li>
+                    <li><a href="http://web.archive.org/web/20131001121723/http://try.sencha.com/">Sencha Try</a></li>                    
+                </ul>
+                <ul class="column">
+                    <li>
+                        <a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/">Company</a>
+                        <ul class="zero">
+<li class="first"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/team/">Team</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/careers/">Careers</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/events/">Events</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/press/">Press</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/partners/">Partners</a></li>
+<li><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/contact/">Contact</a></li>
+<li class="last"><a href="http://web.archive.org/web/20131001121723/http://www.sencha.com/company/customers/">Customers</a></li>
+</ul>
+                    </li>
+                </ul>
+                <ul class="column">
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/blog/">Blog</a></li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/forum/">Forum</a></li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://docs.sencha.com/">API Docs</a></li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/apps/">App Gallery</a></li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://pages.sencha.com/resources">Resource Library</a></li>
+                    <li><a class="main" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/store/">Store</a></li>
+                    <li><a class="legal" href="http://web.archive.org/web/20131001121723/http://www.sencha.com/legal/">Legal</a></li>
+                </ul>
+                <ul class="column social last">
+                    <li><a class="facebook" href="http://web.archive.org/web/20131001121723/http://www.facebook.com/senchainc">Facebook</a></li>
+                    <li><a class="linkedin" href="http://web.archive.org/web/20131001121723/http://j.mp/sencha-in">LinkedIn</a></li>
+                    <li><a class="twitter" href="http://web.archive.org/web/20131001121723/http://twitter.com/sencha">Twitter</a></li>
+                    <li><a class="tumblr" href="http://web.archive.org/web/20131001121723/http://senchainc.tumblr.com/">Tumblr</a></li>
+                    <li><a class="vimeo" href="http://web.archive.org/web/20131001121723/http://vimeo.com/sencha">Vimeo</a></li>
+                    <li><a class="gplus" href="http://web.archive.org/web/20131001121723/https://plus.google.com/117303203295549187007">Google+</a></li>
+                </ul>
+            </div>
+                            <form action="http://web.archive.org/web/20131001121723/http://app-j.marketo.com/index.php/leadCapture/save" method="post" enctype="application/x-www-form-urlencoded" id="marketoEmailForm-footer" name="marketoEmailForm-footer" class="marketoEmailForm email-signup-form">
+    <label for="marketoEmail-footer">
+        <span>Sign up for exclusive Sencha news!</span>
+        <input id="Email" name="Email" type="email" placeholder="Email" size="25" class="email-field">
+        <input name="Company_News__c" id="Company_News__c" type="hidden" value="Yes">
+        <input type="hidden" name="lpId" value="1543">
+        <input type="hidden" name="subId" value="85">
+        <input type="hidden" name="formid" value="48">
+        <input type="hidden" name="lpurl" value="http://pages.sencha.com/newsletter.html?cr={creative}&amp;kw={keyword}">
+        <input type="hidden" name="_mkt_disp" value="return">
+        <input type="hidden" name="_mkt_trk" value="id:374-WES-121&amp;token:_mch-sencha.com-1341079805378-46685">
+        <input name="LeadSource" id="LeadSource" type="hidden" value="Website">
+        <input name="Secondary_Source__c" id="Secondary_Source__c" type="hidden" value="Newsletter">
+        <input name="returnURL" type="hidden" value="http://www.sencha.com/products/extjs/download?n=y">
+        <input name="retURL" type="hidden" value="http://www.sencha.com/products/extjs/download?n=y">
+        <button id="email-signup-submit-footer" name="email-signup-submit-footer" class="button-link inline grey small">Sign up</button>
+    </label>
+    <p class="thanks" style="margin-bottom:42px;">Thanks for signing up!</p>
+</form>
+
+<div class="like-tweet">
+    
+    <div class="g-plusone" data-size="medium" data-count="true" data-href="http://www.sencha.com/products/extjs/download"></div><br>
+
+    
+    <a href="http://web.archive.org/web/20131001121723/http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Sencha"></a><br>
+
+    
+    <div class="fb-like" data-send="false" data-href="http://www.sencha.com/products/extjs/download" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+</div>
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/widgets.js"></script>
+<div id="fb-root"></div>
+<script>(function(){
+var e=document.createElement('script');e.async=true;
+e.src=document.location.protocol+'//connect.facebook.net/en_US/all.js#xfbml=1';
+document.getElementById('fb-root').appendChild(e);}());
+</script>
+                    </nav>
+				        <hr>
+
+        <p style="float:left;width:50%;"><a href="http://web.archive.org/web/20131001121723/http://www.senchadevs.com/" title="Find Sencha developers near you." class="more-icon">Find Sencha developers at SenchaDevs</a></p>
+
+        <div id="copyright">
+            <p>© 2013 Sencha Inc. All rights reserved.</p>
+        </div>
+            </div> <!-- /#footer-content -->
+</footer>
+
+
+
+
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/vbulletin_md5.js"></script>
+
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="/js/ie6.js"></script>
+<![endif]-->
+<script src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/saved_resource(1)" type="text/javascript" charset="utf-8"></script>
+
+
+
+            <script type="text/javascript">
+            var google_conversion_id = 1023336336;
+            var google_conversion_language = "en";
+            var google_conversion_format = "3";
+            var google_conversion_color = "666666";
+            var google_conversion_label = "U6AECNjyhQIQkL_75wM";
+            var google_conversion_value = 0;
+        </script>
+        <script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/conversion.js"></script>
+        
+        <noscript>
+            &lt;div style="display:inline;"&gt;
+            &lt;img height="1" width="1" style="border-style:none;" alt="" src="/web/20131001121723im_/http://www.googleadservices.com/pagead/conversion/1023336336/?label=U6AECNjyhQIQkL_75wM&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+            &lt;/div&gt;
+        </noscript>
+    
+
+<script src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/munchkin.js"></script>
+<script>mktoMunchkin('374-WES-121');</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = '/web/20131001121723/https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript">var llactid=19761</script> 
+<script type="text/javascript" src="./GPL Download Sencha Ext JS   JavaScript Framework for Building Rich Desktop Web Applications   Sencha_files/trackalyze.js"></script>
+
+
+
+<!-- 166/1.2263 -->
+
+
+
+
+<!--
+     FILE ARCHIVED ON 12:17:23 окт 1, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 1:03:44 окт 10, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+</body></html>
