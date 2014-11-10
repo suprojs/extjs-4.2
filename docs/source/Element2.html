@@ -1540,7 +1540,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             // or first focusable element, and forcibly to a circular navigation.
             // We cannot know the true first or last focusable element, so this problem still exists for IE6,7,8
             // See Ext.util.Floating
-            if (tabIndexAttr &amp;&amp; tabIndexAttr.specified) {
+            if (tabIndexAttr) {
                 tabIndex = tabIndexAttr.value;
             }
             if (dom &amp;&amp; !dom.disabled) {

@@ -21467,7 +21467,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             
             
             
-            if (tabIndexAttr && tabIndexAttr.specified) {
+            if (tabIndexAttr) {
                 tabIndex = tabIndexAttr.value;
             }
             if (dom && !dom.disabled) {
