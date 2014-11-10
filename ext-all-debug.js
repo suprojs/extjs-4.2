@@ -5922,11 +5922,11 @@ var noArgs = [],
         
         define: function (className, data, createdFn) {
             
-            if (data.override) {
-                return Manager.createOverride.apply(Manager, arguments);
+            if (!data.override) {
+                return Manager.create(className, data, createdFn);
             }
 
-            return Manager.create.apply(Manager, arguments);
+            return Manager.createOverride(className, data, createdFn);
         },
 
         

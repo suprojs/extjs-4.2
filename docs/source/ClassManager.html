@@ -1681,11 +1681,11 @@
             Ext.classSystemMonitor &amp;&amp; Ext.classSystemMonitor(className, 'ClassManager#define', arguments);
             //&lt;/debug&gt;
             
-            if (data.override) {
-                return Manager.createOverride.apply(Manager, arguments);
+            if (!data.override) {
+                return Manager.create(className, data, createdFn);
             }
 
-            return Manager.create.apply(Manager, arguments);
+            return Manager.createOverride(className, data, createdFn);
         },
 
 <span id='Ext-ClassManager-method-undefine'>        /**
