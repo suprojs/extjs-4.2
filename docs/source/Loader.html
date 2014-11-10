@@ -831,8 +831,7 @@ Ext.Loader = new function() {
             var config = Loader.getConfig(),
                 noCacheUrl = url + (config.disableCaching ? ('?' + config.disableCachingParam + '=' + Ext.Date.now()) : ''),
                 isCrossOriginRestricted = false,
-                xhr, status, onScriptError,
-                debugSourceURL = &quot;&quot;;
+                xhr, status, onScriptError;
 
             scope = scope || Loader;
 
@@ -882,13 +881,7 @@ Ext.Loader = new function() {
                     || isPhantomJS
                     //&lt;/if&gt;
                 ) {
-                    // Debugger friendly, file names are still shown even though they're eval'ed code
-                    // Breakpoints work on both Firebug and Chrome's Web Inspector
-                    if (!Ext.isIE) {
-                        debugSourceURL = &quot;\n//@ sourceURL=&quot; + url;
-                    }
-
-                    Ext.globalEval(xhr.responseText + debugSourceURL);
+                    Ext.globalEval(xhr.responseText);
 
                     onLoad.call(scope);
                 }
