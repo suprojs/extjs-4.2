@@ -141,6 +141,9 @@ Ext.define('Ext.window.MessageBox', {
 </span><span id='Ext-window-MessageBox-cfg-maxHeight'>    maxHeight: null,
 </span><span id='Ext-window-MessageBox-cfg-constrain'>    constrain: true,
 </span>
+    width: void 0,
+    height: void 0,
+
 <span id='Ext-window-MessageBox-cfg-cls'>    cls: [Ext.baseCSSPrefix + 'message-box', Ext.baseCSSPrefix + 'hide-offsets'],
 </span>
 <span id='Ext-window-MessageBox-cfg-layout'>    layout: {
@@ -336,12 +339,14 @@ Ext.define('Ext.window.MessageBox', {
         me.callParent();
     },
 
+    itemId: '',
+
 <span id='Ext-window-MessageBox-method-onClose'>    onClose: function(){
 </span>        var btn = this.header.child('[type=close]');
         // Give a temporary itemId so it can act like the cancel button
         btn.itemId = 'cancel';
         this.btnCallback(btn);
-        delete btn.itemId;
+        btn.itemId = '';
     },
 
 <span id='Ext-window-MessageBox-method-onPromptKey'>    onPromptKey: function(textField, e) {
@@ -355,6 +360,8 @@ Ext.define('Ext.window.MessageBox', {
             }
         }
     },
+
+    defaultFocus: void 0,
 
 <span id='Ext-window-MessageBox-method-reconfigure'>    reconfigure: function(cfg) {
 </span>        var me = this,
@@ -392,9 +399,10 @@ Ext.define('Ext.window.MessageBox', {
         }
 
         // Default to allowing the Window to take focus.
-        delete me.defaultFocus;
         if (cfg.defaultFocus) {
             me.defaultFocus = cfg.defaultFocus;
+        } else if(me.defaultFocus) {
+            me.defaultFocus = void 0;
         }
 
         // clear any old animateTarget
@@ -426,8 +434,7 @@ Ext.define('Ext.window.MessageBox', {
         // During the on render, or size resetting layouts, and in subsequent hiding and showing, we need to
         // suspend layouts, and flush at the end when the Window's children are at their final visibility.
         Ext.suspendLayouts();
-        delete me.width;
-        delete me.height;
+        me.width = me.height = void 0;
         if (width || height) {
             if (width) {
                 me.setWidth(width);

@@ -1480,10 +1480,10 @@ Ext.define('Ext.AbstractComponent', {
                 me.el.setSize(curWidth, curHeight);
 
                 if (clearWidth) {
-                    delete me.width;
+                    me.width = void 0;
                 }
                 if (clearHeight) {
-                    delete me.height;
+                    me.height = void 0;
                 }
             }
             if (hasToWidth) {
@@ -3306,14 +3306,10 @@ Ext.define('Ext.AbstractComponent', {
         // Constrain within configured maxima
         if (typeof width == 'number') {
             me.width = Ext.Number.constrain(width, me.minWidth, me.maxWidth);
-        } else if (width === null) {
-            delete me.width;
         }
         
         if (typeof height == 'number') {
             me.height = Ext.Number.constrain(height, me.minHeight, me.maxHeight);
-        } else if (height === null) {
-            delete me.height;
         }
 
         // If not rendered, all we need to is set the properties.

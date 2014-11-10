@@ -30359,10 +30359,10 @@ Ext.define('Ext.AbstractComponent', {
                 me.el.setSize(curWidth, curHeight);
 
                 if (clearWidth) {
-                    delete me.width;
+                    me.width = void 0;
                 }
                 if (clearHeight) {
-                    delete me.height;
+                    me.height = void 0;
                 }
             }
             if (hasToWidth) {
@@ -31754,14 +31754,10 @@ Ext.define('Ext.AbstractComponent', {
         
         if (typeof width == 'number') {
             me.width = Ext.Number.constrain(width, me.minWidth, me.maxWidth);
-        } else if (width === null) {
-            delete me.width;
         }
         
         if (typeof height == 'number') {
             me.height = Ext.Number.constrain(height, me.minHeight, me.maxHeight);
-        } else if (height === null) {
-            delete me.height;
         }
 
         
@@ -90080,6 +90076,8 @@ Ext.define('Ext.window.MessageBox', {
     minHeight: null,
     maxHeight: null,
     constrain: true,
+    width: void 0,
+    height: void 0,
 
     cls: [Ext.baseCSSPrefix + 'message-box', Ext.baseCSSPrefix + 'hide-offsets'],
 
@@ -90257,12 +90255,14 @@ Ext.define('Ext.window.MessageBox', {
         me.callParent();
     },
 
+    itemId: '',
+
     onClose: function(){
         var btn = this.header.child('[type=close]');
         
         btn.itemId = 'cancel';
         this.btnCallback(btn);
-        delete btn.itemId;
+        btn.itemId = '';
     },
 
     onPromptKey: function(textField, e) {
@@ -90276,6 +90276,8 @@ Ext.define('Ext.window.MessageBox', {
             }
         }
     },
+
+    defaultFocus: void 0,
 
     reconfigure: function(cfg) {
         var me = this,
@@ -90313,9 +90315,10 @@ Ext.define('Ext.window.MessageBox', {
         }
 
         
-        delete me.defaultFocus;
         if (cfg.defaultFocus) {
             me.defaultFocus = cfg.defaultFocus;
+        } else if(me.defaultFocus) {
+            me.defaultFocus = void 0;
         }
 
         
@@ -90347,8 +90350,7 @@ Ext.define('Ext.window.MessageBox', {
         
         
         Ext.suspendLayouts();
-        delete me.width;
-        delete me.height;
+        me.width = me.height = void 0;
         if (width || height) {
             if (width) {
                 me.setWidth(width);
