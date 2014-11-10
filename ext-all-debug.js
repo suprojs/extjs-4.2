@@ -23381,8 +23381,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
     updateKey: function(oldKey, newKey) {
         var me = this,
             map = me.map,
-            indexMap = me.indexMap,
             index = me.indexOfKey(oldKey),
+            indexMap = me.indexMap,
             item;
 
         if (index > -1) {
