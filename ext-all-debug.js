@@ -6548,8 +6548,7 @@ Ext.Loader = new function() {
             var config = Loader.getConfig(),
                 noCacheUrl = url + (config.disableCaching ? ('?' + config.disableCachingParam + '=' + Ext.Date.now()) : ''),
                 isCrossOriginRestricted = false,
-                xhr, status, onScriptError,
-                debugSourceURL = "";
+                xhr, status, onScriptError;
 
             scope = scope || Loader;
 
@@ -6586,11 +6585,8 @@ Ext.Loader = new function() {
                 ) {
                     
                     
-                    if (!Ext.isIE) {
-                        debugSourceURL = "\n//@ sourceURL=" + url;
-                    }
 
-                    Ext.globalEval(xhr.responseText + debugSourceURL);
+                    Ext.globalEval(xhr.responseText);
 
                     onLoad.call(scope);
                 }
