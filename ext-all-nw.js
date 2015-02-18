@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 Contact:  http://www.sencha.com/contact
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (bc11ee8988658749654d3054fa0f7c083f25fea2)
+Source: ext-all-debug.js (943356d6ba90efbb53a98bc9293feae07f302b43)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -4020,6 +4020,13 @@ if (!cls) {
 Ext.syncRequire(name);
 cls = this.get(name);
 }
+if(!cls){
+console.error(
+"[Ext.create] Cannot create an instance of unrecognized class name / alias: " +
+name+' / '+alias
+);
+return Ext.Base;
+}
 return this.getInstantiator(args.length)(cls, args);
 },
 dynInstantiate: function(name, args) {
@@ -4640,6 +4647,7 @@ Ext.globalEval(xhr.responseText);
 onLoad.call(scope);
 }
 else {
+onError.call(Loader);
 }
 xhr = null;
 }
