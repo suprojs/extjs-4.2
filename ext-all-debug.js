@@ -5678,7 +5678,13 @@ var noArgs = [],
 
                 cls = this.get(name);
             }
-
+            if(!cls){
+                console.error(
+"[Ext.create] Cannot create an instance of unrecognized class name / alias: " +
+                                                            name+' / '+alias
+                );
+                return Ext.Base;
+            }
 
             return this.getInstantiator(args.length)(cls, args);
         },
