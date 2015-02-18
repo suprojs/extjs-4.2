@@ -6594,6 +6594,7 @@ Ext.Loader = new function() {
                     onLoad.call(scope);
                 }
                 else {
+                    onError.call(Loader);
                 }
 
                 
