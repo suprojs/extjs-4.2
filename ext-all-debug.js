@@ -31472,9 +31472,7 @@ Ext.define('Ext.AbstractComponent', {
     enable: function(silent) {
         var me = this;
 
-        if(!me.disabled) return me;
-        me.disabled = false;
-
+        delete me.disableOnBoxReady;
         me.removeCls(me.disabledCls);
         if (me.rendered) {
             me.onEnable();
@@ -31482,8 +31480,8 @@ Ext.define('Ext.AbstractComponent', {
             me.enableOnBoxReady = true;
         }
 
-        me.disableOnBoxReady && (me.disableOnBoxReady = false);
-        me.resetDisable && (me.resetDisable = false);
+        me.disabled = false;
+        delete me.resetDisable;
 
         if (silent !== true) {
             me.fireEvent('enable', me);
@@ -31496,10 +31494,7 @@ Ext.define('Ext.AbstractComponent', {
     disable: function(silent) {
         var me = this;
 
-        if(me.disabled) return me;
-        me.disabled = true;
-
-        me.enableOnBoxReady && (me.enableOnBoxReady = false);
+        delete me.enableOnBoxReady;
         me.addCls(me.disabledCls);
         if (me.rendered) {
             me.onDisable();
@@ -31507,8 +31502,10 @@ Ext.define('Ext.AbstractComponent', {
             me.disableOnBoxReady = true;
         }
 
+        me.disabled = true;
+
         if (silent !== true) {
-            me.resetDisable && (me.resetDisable = false);
+            delete me.resetDisable;
             me.fireEvent('disable', me);
         }
 
@@ -47172,8 +47169,7 @@ Ext.define('Ext.button.Button', {
     enable: function(silent) {
         var me = this;
 
-        if(!me.disabled) return me;
-        me.callParent([silent]);
+        me.callParent(arguments);
 
         me.removeClsWithUI('disabled');
         if (me.rendered) {
@@ -47187,8 +47183,7 @@ Ext.define('Ext.button.Button', {
     disable: function(silent) {
         var me = this;
 
-        if(me.disabled) return me;
-        me.callParent([silent]);
+        me.callParent(arguments);
 
         me.addClsWithUI('disabled');
         me.removeClsWithUI(me.overCls);

@@ -2884,9 +2884,7 @@ Ext.define('Ext.AbstractComponent', {
     enable: function(silent) {
         var me = this;
 
-        if(!me.disabled) return me;
-        me.disabled = false;
-
+        delete me.disableOnBoxReady;
         me.removeCls(me.disabledCls);
         if (me.rendered) {
             me.onEnable();
@@ -2894,8 +2892,8 @@ Ext.define('Ext.AbstractComponent', {
             me.enableOnBoxReady = true;
         }
 
-        me.disableOnBoxReady &amp;&amp; (me.disableOnBoxReady = false);
-        me.resetDisable &amp;&amp; (me.resetDisable = false);
+        me.disabled = false;
+        delete me.resetDisable;
 
         if (silent !== true) {
             me.fireEvent('enable', me);
@@ -2912,10 +2910,7 @@ Ext.define('Ext.AbstractComponent', {
     disable: function(silent) {
         var me = this;
 
-        if(me.disabled) return me;
-        me.disabled = true;
-
-        me.enableOnBoxReady &amp;&amp; (me.enableOnBoxReady = false);
+        delete me.enableOnBoxReady;
         me.addCls(me.disabledCls);
         if (me.rendered) {
             me.onDisable();
@@ -2923,8 +2918,10 @@ Ext.define('Ext.AbstractComponent', {
             me.disableOnBoxReady = true;
         }
 
+        me.disabled = true;
+
         if (silent !== true) {
-            me.resetDisable &amp;&amp; (me.resetDisable = false);
+            delete me.resetDisable;
             me.fireEvent('disable', me);
         }
 
