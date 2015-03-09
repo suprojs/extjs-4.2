@@ -1489,7 +1489,8 @@ Ext.define('Ext.button.Button', {
 </span>    enable: function(silent) {
         var me = this;
 
-        me.callParent(arguments);
+        if(!me.disabled) return me;
+        me.callParent([silent]);
 
         me.removeClsWithUI('disabled');
         if (me.rendered) {
@@ -1503,7 +1504,8 @@ Ext.define('Ext.button.Button', {
 </span>    disable: function(silent) {
         var me = this;
 
-        me.callParent(arguments);
+        if(me.disabled) return me;
+        me.callParent([silent]);
 
         me.addClsWithUI('disabled');
         me.removeClsWithUI(me.overCls);

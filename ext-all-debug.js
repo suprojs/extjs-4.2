@@ -30207,6 +30207,10 @@ Ext.define('Ext.AbstractComponent', {
 
         me.initComponent();
 
+        if(me.disabled) {
+            me.disabled = false;
+            me.disable();
+        }
         
         Ext.ComponentManager.register(me);
 
@@ -31472,7 +31476,9 @@ Ext.define('Ext.AbstractComponent', {
     enable: function(silent) {
         var me = this;
 
-        delete me.disableOnBoxReady;
+        if(!me.disabled) return me;
+        me.disabled = false;
+
         me.removeCls(me.disabledCls);
         if (me.rendered) {
             me.onEnable();
@@ -31480,8 +31486,8 @@ Ext.define('Ext.AbstractComponent', {
             me.enableOnBoxReady = true;
         }
 
-        me.disabled = false;
-        delete me.resetDisable;
+        me.disableOnBoxReady && (me.disableOnBoxReady = false);
+        me.resetDisable && (me.resetDisable = false);
 
         if (silent !== true) {
             me.fireEvent('enable', me);
@@ -31494,7 +31500,10 @@ Ext.define('Ext.AbstractComponent', {
     disable: function(silent) {
         var me = this;
 
-        delete me.enableOnBoxReady;
+        if(me.disabled) return me;
+        me.disabled = true;
+
+        me.enableOnBoxReady && (me.enableOnBoxReady = false);
         me.addCls(me.disabledCls);
         if (me.rendered) {
             me.onDisable();
@@ -31502,10 +31511,8 @@ Ext.define('Ext.AbstractComponent', {
             me.disableOnBoxReady = true;
         }
 
-        me.disabled = true;
-
         if (silent !== true) {
-            delete me.resetDisable;
+            me.resetDisable && (me.resetDisable = false);
             me.fireEvent('disable', me);
         }
 
@@ -47169,7 +47176,8 @@ Ext.define('Ext.button.Button', {
     enable: function(silent) {
         var me = this;
 
-        me.callParent(arguments);
+        if(!me.disabled) return me;
+        me.callParent([silent]);
 
         me.removeClsWithUI('disabled');
         if (me.rendered) {
@@ -47183,7 +47191,8 @@ Ext.define('Ext.button.Button', {
     disable: function(silent) {
         var me = this;
 
-        me.callParent(arguments);
+        if(me.disabled) return me;
+        me.callParent([silent]);
 
         me.addClsWithUI('disabled');
         me.removeClsWithUI(me.overCls);

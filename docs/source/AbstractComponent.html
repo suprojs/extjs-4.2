@@ -1289,6 +1289,12 @@ Ext.define('Ext.AbstractComponent', {
 
         me.initComponent();
 
+        // set initial state explicitly due to prior checks of the 'disabled' flag
+        if(me.disabled) {
+            me.disabled = false;
+            me.disable();
+        }
+
         // ititComponent gets a chance to change the id property before registering
         Ext.ComponentManager.register(me);
 
@@ -2884,7 +2890,9 @@ Ext.define('Ext.AbstractComponent', {
     enable: function(silent) {
         var me = this;
 
-        delete me.disableOnBoxReady;
+        if(!me.disabled) return me;
+        me.disabled = false;
+
         me.removeCls(me.disabledCls);
         if (me.rendered) {
             me.onEnable();
@@ -2892,8 +2900,8 @@ Ext.define('Ext.AbstractComponent', {
             me.enableOnBoxReady = true;
         }
 
-        me.disabled = false;
-        delete me.resetDisable;
+        me.disableOnBoxReady &amp;&amp; (me.disableOnBoxReady = false);
+        me.resetDisable &amp;&amp; (me.resetDisable = false);
 
         if (silent !== true) {
             me.fireEvent('enable', me);
@@ -2910,7 +2918,10 @@ Ext.define('Ext.AbstractComponent', {
     disable: function(silent) {
         var me = this;
 
-        delete me.enableOnBoxReady;
+        if(me.disabled) return me;
+        me.disabled = true;
+
+        me.enableOnBoxReady &amp;&amp; (me.enableOnBoxReady = false);
         me.addCls(me.disabledCls);
         if (me.rendered) {
             me.onDisable();
@@ -2918,10 +2929,8 @@ Ext.define('Ext.AbstractComponent', {
             me.disableOnBoxReady = true;
         }
 
-        me.disabled = true;
-
         if (silent !== true) {
-            delete me.resetDisable;
+            me.resetDisable &amp;&amp; (me.resetDisable = false);
             me.fireEvent('disable', me);
         }
 
