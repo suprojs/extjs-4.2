@@ -1289,13 +1289,7 @@ Ext.define('Ext.AbstractComponent', {
 
         me.initComponent();
 
-        // set initial state explicitly due to prior checks of the 'disabled' flag
-        if(me.disabled) {
-            me.disabled = false;
-            me.disable();
-        }
-
-        // ititComponent gets a chance to change the id property before registering
+        // initComponent gets a chance to change the id property before registering
         Ext.ComponentManager.register(me);
 
         // Don't pass the config so that it is not applied to 'this' again

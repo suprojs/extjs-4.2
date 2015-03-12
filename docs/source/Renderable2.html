@@ -283,6 +283,8 @@ Ext.define('Ext.util.Renderable', {
         me.setUI(me.ui);
 
         if (me.disabled) {
+            // set initial state explicitly due to prior checks in enable()/disable()
+            me.disabled = false;
             // pass silent so the event doesn't fire the first time.
             me.disable(true);
         }

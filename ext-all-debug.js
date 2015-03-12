@@ -28732,6 +28732,7 @@ Ext.define('Ext.util.Renderable', {
 
         if (me.disabled) {
             
+            me.disabled = false;
             me.disable(true);
         }
     },
@@ -30207,11 +30208,6 @@ Ext.define('Ext.AbstractComponent', {
 
         me.initComponent();
 
-        if(me.disabled) {
-            me.disabled = false;
-            me.disable();
-        }
-        
         Ext.ComponentManager.register(me);
 
         
