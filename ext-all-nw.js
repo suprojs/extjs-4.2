@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 Contact:  http://www.sencha.com/contact
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (f056f3c03c20a2bb8b3e800aad3ca2ce3d1b1a1e)
+Source: ext-all-debug.js (c727de9fb2701a38e53f26c050615777b61ba829)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -20691,6 +20691,7 @@ me.overflowStyleSet = true;
 }
 me.setUI(me.ui);
 if (me.disabled) {
+me.disabled = false;
 me.disable(true);
 }
 },
@@ -21617,10 +21618,6 @@ if (!me.hasListeners) {
 me.hasListeners = new me.HasListeners();
 }
 me.initComponent();
-if(me.disabled) {
-me.disabled = false;
-me.disable();
-}
 Ext.ComponentManager.register(me);
 me.mixins.observable.constructor.call(me);
 me.mixins.state.constructor.call(me, config);
