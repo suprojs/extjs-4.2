@@ -917,13 +917,13 @@ Ext.define('Ext.util.Observable', function(Observable) {
                 qLen, q;
 
             if (me.eventsSuspended &amp;&amp; ! --me.eventsSuspended) {
-                delete me.eventQueue;
 
                 if (queued) {
                     qLen = queued.length;
                     for (q = 0; q &lt; qLen; q++) {
                         me.continueFireEvent.apply(me, queued[q]);
                     }
+                    me.eventQueue = void 0;
                 }
             }
         },
