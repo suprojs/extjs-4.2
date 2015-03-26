@@ -6789,6 +6789,44 @@ Ext.Loader = new function() {
                 Loader.refreshQueue();
             }
 
+            if (!Loader.syncModeEnabled && Loader.numPendingFiles === 0 && Loader.isLoading && !Loader.hasFileLoadError) {
+                var missingClasses = [],
+                    missingPaths = [],
+                    requires,
+                    i, ln, j, subLn, s;
+
+                for (i = 0,ln = queue.length; i < ln; i++) {
+                    requires = queue[i].requires;
+
+                    for (j = 0,subLn = requires.length; j < subLn; j++) {
+                        if (isClassFileLoaded[s = requires[j]]) {
+                            missingClasses.push(s);
+                            delete Ext.Loader.isClassFileLoaded[s]
+                            Ext.Loader.isFileLoaded[Ext.Loader.getPath(s)] = false
+                            Ext.undefine(s)
+                        }
+                    }
+                }
+
+                if (missingClasses.length < 1) {
+                    return;
+                }
+
+                missingClasses = Ext.Array.filter(Ext.Array.unique(missingClasses), function(item) {
+                    return !requiresMap.hasOwnProperty(item);
+                }, Loader);
+
+                if (missingClasses.length < 1) {
+                    return;
+                }
+
+                for (i = 0,ln = missingClasses.length; i < ln; i++) {
+                    missingPaths.push(classNameToFilePathMap[missingClasses[i]]);
+                }
+                console.error("The following classes are not declared even if their files have been " +
+                    "loaded: '" + missingClasses.join("', '") + "'. Please check the source code of their " +
+                    "corresponding files for possible typos: '" + missingPaths.join("', '"));
+            }
         },
 
         
