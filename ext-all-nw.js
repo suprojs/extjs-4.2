@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 Contact:  http://www.sencha.com/contact
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (c727de9fb2701a38e53f26c050615777b61ba829)
+Source: ext-all-debug.js (ec7f8a8c553488475f2edda49730eb9f4375bccd)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -4784,6 +4784,38 @@ Loader.numPendingFiles--;
 if (Loader.numPendingFiles === 0) {
 Loader.refreshQueue();
 }
+if (!Loader.syncModeEnabled && Loader.numPendingFiles === 0 && Loader.isLoading && !Loader.hasFileLoadError) {
+var missingClasses = [],
+missingPaths = [],
+requires,
+i, ln, j, subLn, s;
+for (i = 0,ln = queue.length; i < ln; i++) {
+requires = queue[i].requires;
+for (j = 0,subLn = requires.length; j < subLn; j++) {
+if (isClassFileLoaded[s = requires[j]]) {
+missingClasses.push(s);
+delete Ext.Loader.isClassFileLoaded[s]
+Ext.Loader.isFileLoaded[Ext.Loader.getPath(s)] = false
+Ext.undefine(s)
+}
+}
+}
+if (missingClasses.length < 1) {
+return;
+}
+missingClasses = Ext.Array.filter(Ext.Array.unique(missingClasses), function(item) {
+return !requiresMap.hasOwnProperty(item);
+}, Loader);
+if (missingClasses.length < 1) {
+return;
+}
+for (i = 0,ln = missingClasses.length; i < ln; i++) {
+missingPaths.push(classNameToFilePathMap[missingClasses[i]]);
+}
+console.error("The following classes are not declared even if their files have been " +
+"loaded: '" + missingClasses.join("', '") + "'. Please check the source code of their " +
+"corresponding files for possible typos: '" + missingPaths.join("', '"));
+}
 },
 onFileLoadError: function(className, filePath, errorMessage, isSynchronous) {
 Loader.numPendingFiles--;
@@ -8193,12 +8225,12 @@ var me = this,
 queued = me.eventQueue,
 qLen, q;
 if (me.eventsSuspended && ! --me.eventsSuspended) {
-delete me.eventQueue;
 if (queued) {
 qLen = queued.length;
 for (q = 0; q < qLen; q++) {
 me.continueFireEvent.apply(me, queued[q]);
 }
+me.eventQueue = void 0;
 }
 }
 },
@@ -52100,18 +52132,7 @@ me.callParent([config]);
 me.extraParams = config.extraParams || {};
 me.api = Ext.apply({}, config.api || me.api);
 me.nocache = me.noCache;
-},
-create: function() {
-return this.doRequest.apply(this, arguments);
-},
-read: function() {
-return this.doRequest.apply(this, arguments);
-},
-update: function() {
-return this.doRequest.apply(this, arguments);
-},
-destroy: function() {
-return this.doRequest.apply(this, arguments);
+me.create = me.read = me.update = me.destroy = me.doRequest;
 },
 setExtraParam: function(name, value) {
 this.extraParams[name] = value;
