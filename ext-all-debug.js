@@ -72730,24 +72730,9 @@ Ext.define('Ext.data.proxy.Server', {
 
         
         me.nocache = me.noCache;
+        me.create = me.read = me.update = me.destroy = me.doRequest;
     },
 
-    
-    create: function() {
-        return this.doRequest.apply(this, arguments);
-    },
-
-    read: function() {
-        return this.doRequest.apply(this, arguments);
-    },
-
-    update: function() {
-        return this.doRequest.apply(this, arguments);
-    },
-
-    destroy: function() {
-        return this.doRequest.apply(this, arguments);
-    },
 
     
     setExtraParam: function(name, value) {
