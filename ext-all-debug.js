@@ -25222,7 +25222,7 @@ Ext.define('Ext.fx.Manager', {
         
         
         
-        me.taskRunner = new Ext.util.TaskRunner({interval: 16});
+        me.taskRunner = new Ext.util.TaskRunner(me.interval);
 
         
         
