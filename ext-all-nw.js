@@ -1,10 +1,10 @@
 /*
 This file is part of Ext JS 4.2
 Copyright (c) 2011-2013 Sencha Inc
-Contact:  http://www.sencha.com/contact
+GNU General Public License Usage
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (ec7f8a8c553488475f2edda49730eb9f4375bccd)
+Source: ext-all-debug.js (73d91bf5a3e3288aea572f1abf8ea01d65639c6d)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -17832,7 +17832,7 @@ var me = this;
 me.items = new Ext.util.MixedCollection();
 me.targetArr = {};
 me.mixins.queue.constructor.call(me);
-me.taskRunner = new Ext.util.TaskRunner({interval: 16});
+me.taskRunner = new Ext.util.TaskRunner(me.interval);
 },
 interval: 16,
 forceJS: true,
