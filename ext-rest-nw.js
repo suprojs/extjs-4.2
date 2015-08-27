@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 GNU General Public License Usage
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (73d91bf5a3e3288aea572f1abf8ea01d65639c6d)
+Source: ext-all-debug.js (a6956528f9e51de3e1a3924e99f2b370f3c7cbb2)
 */
 Ext.define('Ext.perf.Accumulator', (function () {
 var currentFrame = null,
@@ -50159,16 +50159,16 @@ Ext.define('App.proxy.CRUD',{
 extend: Ext.data.proxy.Rest,
 alias: 'proxy.crud',
 batchActions: true,
-startParam: undefined,// our default is empty params || startParam: 'skip'
-pageParam: undefined,
-limitParam: undefined,// || limitParam: 'limit'
+startParam: void 0,// our default is empty params || startParam: 'skip'
+pageParam: void 0,
+limitParam: void 0,// || limitParam: 'limit'
 appendId: false,// and no ID in URL tail
-timeout: 2048,// arbitrary
+timeout: App.cfg.extjs['proxy.CRUD.timeout'] || 2048,
 listeners:{
 exception:
 function crud_exception_proxy(proxy, res, op){
 var msg, icon
-try { icon = JSON.parse(res.responseText).data } catch(ex){ }
+try { icon = JSON.parse(res.responseText).err } catch(ex){ }
 if(icon){
 if('~' == icon[0] && proxy.storeId){
 msg = Ext.StoreManager.lookup(proxy.storeId)
@@ -50183,7 +50183,7 @@ icon = '_' == icon[0] ? Ext.Msg.WARNING : Ext.Msg.ERROR
 msg = l10n.err_crud_proxy
 icon = Ext.Msg.ERROR
 }
-console.error(arguments), console.error(op.error)
+console.error(proxy, res, op, op.error)
 if(!Ext.Msg.isVisible()) Ext.Msg.show({
 title: l10n.errun_title,
 buttons: Ext.Msg.OK,
@@ -50222,23 +50222,20 @@ me.onMetaChange(result)
 } else if(data.metaData){
 me.onMetaChange(data.metaData)
 }
+root = me.getRoot(data) || (Ext.isArray(data) ? data : [ ])// { } || [] replies
 result = {
-total  : data.total || 0,
-count  : 0,
-records: [ ],
-success: me.getSuccess(data),
-message: me.messageProperty ? me.getMessage(data) : null
+total  : data.total || me.proxy.totalDefault || 0,
+count  : root.length,
+records: root,
+success: !root.err,
+message: me.messageProperty ? me.getMessage(data) : void 0
 }
-if(result.success){
-root = me.getRoot(data)// is Array or blow up
-if((result.count = root.length)){
+if(result.success && root.length){
 Model = me.model
 do {
 data = (root[mo] = new Model(root[mo]))
 data.phantom && (data.phantom = false)// if no IDs from the server
 } while(++mo < root.length)
-}
-result.records = root
 }
 return new Ext.data.ResultSet(result)
 }
@@ -50692,10 +50689,12 @@ function initSubAppWindow(){
 var me = App.mod.wnd = this
 if(me.id && !me.wmId) me.wmId = me.id
 if(!me.wmId) throw new Error('no `wmId || id` property in: ' + me.$className)
+me.icon = me.wmImg
 me.tools = [
 {
 type: 'refresh',
 tooltip: ''// developer's stuff must have no `l10n`
++'<b style="background-color:black;color:white">[F2]</b> '
 +'view developent reload: <b>l10n</b>, <b>view</b> && <b>controller</b><br>'
 +'<b style="color:red">NOTE</b>: no models or stores etc. are reloaded<br>'
 +'hook to <b>thisView.on("destroy")</b> event to reload anything else<br>'
@@ -50725,6 +50724,7 @@ destroy: me.on_close_window,
 activate: me.on_activate_window,
 deactivate: me.on_deactivate_window
 })
+App.mod.wnd = void 0// load and run is OK
 return
 },
 fix_maximized_height: function fixMaximizedHeight(w){
@@ -50804,7 +50804,7 @@ delete App.view.items_Bar
 Ext.define('App.view.desktop.Shortcuts',{
 extend: Ext.toolbar.Toolbar,
 xtype: 'app-shortcuts',
-style: 'background-color:transparent;background-image:none;'
+style: 'background-color:transparent;background-image:none;border-width:0'
 ,enableOverflow: true
 ,defaults: {
 reorderable: true

@@ -30195,6 +30195,7 @@ Ext.define('Ext.AbstractComponent', {
 
 
 
+Ext.ns('Ext.data.flash.BinaryXhr');Ext.data.flash.BinaryXhr=Ext.emptyFn;
 
 
 Ext.define('Ext.data.Connection', {

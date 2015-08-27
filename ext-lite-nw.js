@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 GNU General Public License Usage
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (73d91bf5a3e3288aea572f1abf8ea01d65639c6d)
+Source: ext-all-debug.js (a6956528f9e51de3e1a3924e99f2b370f3c7cbb2)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -21285,6 +21285,7 @@ fn.call(scope);
 AbstractComponent.resumeLayouts(true);
 };
 });
+Ext.ns('Ext.data.flash.BinaryXhr');Ext.data.flash.BinaryXhr=Ext.emptyFn;
 Ext.define('Ext.data.Connection', {
 mixins: {
 observable:  Ext.util.Observable 
@@ -43340,7 +43341,7 @@ return true
 }
 function launchApp(){
 var tmp
-con.log('Ext.application.launch: OK')
+con.log('Ext.application.launch: OK\nCreating Viewport...')
 tmp = App.cfg.backend
 App.sts(tmp.op, tmp.msg, l10n.stsOK, tmp.time)
 tmp.op = tmp.msg = tmp.time = void 0// GC
@@ -43495,6 +43496,14 @@ con.log(
 '_readyTime - _startTime: ' + (new Date().getTime() - _startTime) + '\n' +
 'ExtJS + App launch: OK'
 )
+localStorage.devSUPRO && new Ext.util.KeyMap(Ext.getBody(),{
+key: Ext.EventObject.F2,
+handler: function(keycode, e){
+console.warn('dev: F2')
+e.stopEvent()
+App.reload(Ext.WindowManager.getActive())
+}
+})
 if(App.User){
 App.User.loginView(extjs_rest)
 return
@@ -43530,10 +43539,13 @@ files = defLoad.concat(el)
 el.splice(0)// GC
 }
 }
-el = void 0
 if(files.length){
 i = 0
+el = App.cfg.extjs.loadMiniInit
+el && Ext.Loader.setConfig({ disableCaching: false })
 loadRestScripts()
+el && Ext.Loader.setConfig({ disableCaching: true })
+el = void 0
 } else {
 Ext_application()
 }
@@ -43647,8 +43659,7 @@ ai.eventbus.unlisten(panel.__ctl)
 ai.controllers.removeAtKey(panel.__ctl)
 App.undefine(panel.__ctl)
 }
-panel = panel.$className
-App.undefine(panel)
+App.undefine(panel.$className)
 } catch(ex){ }
 }
 function sub_app_reload_devel_view(panel, tool, event){
@@ -43664,6 +43675,14 @@ msg: url
 return
 }
 wmId = panel.wmId
+con.warn('trying to reload "' + panel.$className + '";\nuse `App.reloadFailed()` to redo a failed run.' )
+App.reloadFailed = (function(panel){
+return function(){
+con.warn('redo App.reload("' + panel.$className + '")')
+App.reloadFailed = void 0
+sub_app_reload_devel_view(panel)
+}
+})(panel)
 App.unload(panel)
 url_l10n = App.backendURL + '/l10n/' + wmId
 .replace(/([^.]+)[.].*$/, l10n.lang + '_$1.js')
@@ -43698,11 +43717,13 @@ url: url = url.replace(/[/]view[/]/, '/controller/')
 }
 function ctl_loaded(){
 App.create(wmId.replace(/view[.]/, 'controller.'))
+App.reloadFailed = void 0
 }
 function ctl_not_loaded(){
 App.create(wmId, null,{
 constrainTo: Ext.getCmp('desk').getEl()
 })
+App.reloadFailed = void 0
 }
 }
 function get_help_abstract(panel, tool, event){
@@ -43724,7 +43745,6 @@ App.backend.req('/uncaughtExceptions',{/* dummy hash to get JSON */},
 function(err, data){
 con.log('uncaughtExceptions err: ', err)
 if(data && data.length){
-con.table(data)
 Ext.Msg.alert({
 buttons: Ext.Msg.OK,
 icon: Ext.Msg.ERROR,
@@ -43734,6 +43754,7 @@ fn: function(btn){
 con.log(btn)
 }
 })
+con.table(data)
 }
 })
 }
@@ -44085,6 +44106,7 @@ a.callback = void 0
 }
 form = me.form = Ext.widget({
 renderTo: 'login-form',
+itemId: 'login-form',
 xtype: 'container',// mini: no need of `basicForm`, `panel`, etc.
 width: '100%',
 margin: '20px 0 0 0',
@@ -44435,16 +44457,7 @@ view.el.select('#l10n').removeAllListeners()
 view = view.destroy()// assign `undefined` to `view` for GC
 }
 function backendEventsCtlLogin(success, data){
-var evn, cmp, s
-App.sts(
-'backend events',
-success ? data.length : data,// data || res.statusText
-success ? l10n.stsOK : l10n.stsHE,
-s = new Date
-)
-console.log('wes: ' + s)
-console.log(data)
-console.table(data)
+var evn, cmp, s, uncaught
 if('string' == typeof data) switch (data){// simple event
 case 'Disconnect':
 case 'Unauthorized':
@@ -44463,11 +44476,11 @@ cmp.setIconCls('appbar-user-' + s)
 }
 break
 case 'uncaught@global':
-if(App.User.can['uncaught@global'] && Ext.Msg.hidden) Ext.Msg.alert(
+if(App.User.can[uncaught = 'uncaught@global'] && Ext.Msg.hidden) Ext.Msg.alert(
 {
 buttons: Ext.Msg.OK,
 icon: Ext.Msg.ERROR,
-title: 'uncaught@global',
+title: uncaught,
 msg: data[evn].json,
 fn: function(btn){
 }
@@ -44484,6 +44497,14 @@ Ext.WindowManager.bringToFront(view)
 break
 default:break
 }
+App.sts(
+'backend events',
+success ? data.length : data,// data || res.statusText
+success && !uncaught ? l10n.stsOK : l10n.stsHE,
+s = new Date
+)
+console.log('wes: ' + s, data)
+console.table(data)
 }
 function handleInitBackendWaitEvents(msg){
 App.sts(
