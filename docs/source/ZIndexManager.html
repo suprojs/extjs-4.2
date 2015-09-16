@@ -477,11 +477,11 @@ Ext.define('Ext.ZIndexManager', {
 
         for (; i &lt; len; i++) {
             comp = tempHidden[i];
-            comp.el.show();
+            comp.el &amp;&amp; comp.el.show();
             comp.hidden = false;
             comp.setPosition(comp.x, comp.y);
         }
-        delete this.tempHidden;
+        this.tempHidden = void 0;
     },
 
 <span id='Ext-ZIndexManager-method-getActive'>    /**
