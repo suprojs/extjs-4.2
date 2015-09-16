@@ -47582,7 +47582,7 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             'iconCls', 'icon', 'itemId', 'disabled', 'handler', 'scope', 'menu', 'tabIndex'
         ]);
 
-        Ext.apply(config, {
+        Ext.applyIf(config, {
             text       : component.overflowText || component.text,
             hideOnClick: hideOnClick,
             destroyMenu: false,
@@ -47707,6 +47707,8 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             delete trigger.ownerCt;
         }
         Ext.destroy(this.menu, trigger);
+        
+        this.callParent();
     }
 });
 
