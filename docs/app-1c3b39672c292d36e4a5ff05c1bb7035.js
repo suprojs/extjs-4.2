@@ -6154,7 +6154,7 @@ var P = Docs.data.search;
 for (var D = 0, B = P.length; D < B; D++) {
 var K = P[D];
 var i = H ? K.fullName : K.name;
-var C = K.meta.removed ? E : (K.meta["private"] ? Q : (K.meta.deprecated ? A : O));
+var C = K.meta ? K.meta.removed ? E : (K.meta["private"] ? Q : (K.meta.deprecated ? A : O)) : O;
 if (z.test(i)) {
 G[K.sort + C + J].push(this.highlightMatch(K, z))
 } else {
