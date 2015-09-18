@@ -93191,17 +93191,23 @@ Ext.define('Ext.form.Label', {
         });
     },
 
+    initComponent: function() {
+        this.addEvents(
+            'textchange'
+        );
+    },
     
     setText : function(text, encode){
         var me = this;
         
+        me.fireEvent('textchange', this, text, me.text);
         encode = encode !== false;
         if(encode) {
             me.text = text;
-            delete me.html;
+            me.html = void 0;
         } else {
             me.html = text;
-            delete me.text;
+            me.text = void 0;
         }
         
         if(me.rendered){

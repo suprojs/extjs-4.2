@@ -70492,6 +70492,22 @@ Docs = {
         "url": "#!/api/Ext.form.Label-cfg-html"
       },
       {
+        "meta": {},
+        "icon": "icon-event",
+        "fullName": "Ext.form.Label.textchange",
+        "sort": 3,
+        "name": "textchange",
+        "url": "#!/api/Ext.form.Label-event-textchange"
+      },
+      {
+        "meta": {},
+        "icon": "icon-method",
+        "fullName": "Ext.form.Label.initComponent",
+        "sort": 3,
+        "name": "initComponent",
+        "url": "#!/api/Ext.form.Label-method-initComponent"
+      },
+      {
         "meta": {
           "chainable": true
         },
