@@ -326,6 +326,9 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             config.listeners.change = function(c, newVal, oldVal) {                            
                 component.setValue(newVal);
             }
+        } else if (component.text){
+            // sync text in e.g. labels
+            config.text = component.text
         }
 
         // ToggleButtons become CheckItems
@@ -340,13 +343,21 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             });
         }
 
-        // Buttons may have their text or icon changed - this must be propagated to the clone in the overflow menu
-        if (component.isButton &amp;&amp; !component.changeListenersAdded) {
-            component.on({
-                textchange: me.onButtonAttrChange,
-                iconchange: me.onButtonAttrChange,
-                toggle:     me.onButtonToggle
-            });
+        if (!component.changeListenersAdded) {
+            if (component.isButton){
+                // Buttons may have their text or icon changed -
+                // this must be propagated to the clone in the overflow menu
+                component.on({
+                    textchange: me.onButtonAttrChange,
+                    iconchange: me.onButtonAttrChange,
+                    toggle:     me.onButtonToggle
+                });
+            } else if ('text' in component) {
+                // Text in e.g. labels may change also
+                component.on({
+                    textchange: me.onTextChange
+                });
+            }
             component.changeListenersAdded = true;
         }
 
@@ -359,6 +370,10 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
         delete config.id;
         delete config.itemId;
         return config;
+    },
+
+<span id='Ext-layout-container-boxOverflow-Menu-method-onTextChange'>    onTextChange: function(cmp, newText) {
+</span>        cmp.overflowClone.setText(newText);
     },
 
 <span id='Ext-layout-container-boxOverflow-Menu-method-onButtonAttrChange'>    onButtonAttrChange: function(btn) {

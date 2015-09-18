@@ -47601,6 +47601,8 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             config.listeners.change = function(c, newVal, oldVal) {                            
                 component.setValue(newVal);
             }
+        } else if (component.text){
+            config.text = component.text
         }
 
         
@@ -47616,12 +47618,18 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
         }
 
         
-        if (component.isButton && !component.changeListenersAdded) {
-            component.on({
-                textchange: me.onButtonAttrChange,
-                iconchange: me.onButtonAttrChange,
-                toggle:     me.onButtonToggle
-            });
+        if (!component.changeListenersAdded) {
+            if (component.isButton){
+                component.on({
+                    textchange: me.onButtonAttrChange,
+                    iconchange: me.onButtonAttrChange,
+                    toggle:     me.onButtonToggle
+                });
+            } else if ('text' in component) {
+                component.on({
+                    textchange: me.onTextChange
+                });
+            }
             component.changeListenersAdded = true;
         }
 
@@ -47634,6 +47642,10 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
         delete config.id;
         delete config.itemId;
         return config;
+    },
+
+    onTextChange: function(cmp, newText) {
+        cmp.overflowClone.setText(newText);
     },
 
     onButtonAttrChange: function(btn) {
