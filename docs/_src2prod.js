@@ -15,6 +15,32 @@ sed '
 ' < "source/_$APP_FILE" >"$APP_FILE"
 }
 
+htm(){
+# [ 'htm' = "$1" ]
+# $2 e.g. 'output/_Ext...htm' - input html file with '_' prefix
+#
+# olecom@U32U-RX007R_OLE /d/extjs-4.2/docs (master)
+# $ sh _src2prod.js htm output/_Ext.form.Label.htm
+# output/_Ext.form.Label.htm
+# Done
+#
+# olecom@U32U-RX007R_OLE /d/extjs-4.2/docs (master)
+# $ sh _src2prod.js htm output/_Ext.button.Button.htm
+# output/_Ext.button.Button.htm
+# Done
+#
+# olecom@U32U-RX007R_OLE /d/extjs-4.2/docs (master)
+
+APP_FILE=$1
+
+sed '
+    /<pre/,/<[/]pre>/b
+    s/^ *//
+    s/ *$//
+' < "$APP_FILE" >"output/${APP_FILE#*output/_}"
+
+}
+
 app(){
 # process Docs App file:
 # * remove requires
@@ -98,7 +124,7 @@ Ext.define("Docs.Application", {
 
 }
 
-[ 'search' = "$1" ] && search || app
+[ 'search' = "$1" ] && search || [ 'htm' = "$1" ] && htm "$2" || app
 echo "$APP_FILE
 Done"
 
