@@ -517,6 +517,14 @@ Ext.data.JsonP.Ext_layout_container_boxOverflow_Menu({
 "meta": {
 "private": true
 },
+"name": "onTextChange",
+"id": "method-onTextChange"
+}, {
+"tagname": "method",
+"owner": "Ext.layout.container.boxOverflow.Menu",
+"meta": {
+"private": true
+},
 "name": "onButtonAttrChange",
 "id": "method-onButtonAttrChange"
 }, {

@@ -80994,6 +80994,16 @@ Docs = {
 "private": true
 },
 "icon": "icon-method",
+"fullName": "Ext.layout.container.boxOverflow.Menu.onTextChange",
+"sort": 3,
+"name": "onTextChange",
+"url": "#!/api/Ext.layout.container.boxOverflow.Menu-method-onTextChange"
+},
+{
+"meta": {
+"private": true
+},
+"icon": "icon-method",
 "fullName": "Ext.layout.container.boxOverflow.Menu.onButtonAttrChange",
 "sort": 3,
 "name": "onButtonAttrChange",
