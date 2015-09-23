@@ -7544,27 +7544,42 @@ Ext.define("Docs.controller.Classes", {
         var j = f.match(/^#!\/api\/(.*?)(?:-(.*))?$/);
         var g = Docs.ClassRegistry.canonicalName(j[1]);
         var h = j[2];
-        if (this.getOverview()) {
-            this.getOverview().setLoading(true)
+        var me = this;
+        if (me.getOverview()) {
+            me.getOverview().setLoading(true)
         }
-        if (this.cache[g]) {
-            this.showClass(this.cache[g], h)
+        if (me.cache[g]) {
+            me.showClass(me.cache[g], h)
         } else {
-            this.cache[g] = "in-progress";
+            me.cache[g] = "in-progress";
             Ext.data.JsonP.request({
-                url: this.getBaseUrl() + "/output/" + g + ".js",
+                url: me.getBaseUrl() + "/output/" + g + ".js",
                 callbackName: g.replace(/\./g, "_"),
                 success: function(b, a) {
-                    this.cache[g] = b;
-                    this.showClass(b, h)
+                    me.cache[g] = b;
+                    if (b.html) {
+                        return me.showClass(b, h)
+                    }
+                    Ext.Ajax.request({
+                        url: "output/" + g + ".htm",
+                        success: l,
+                        failure: z
+                    });
+                    j = b;
                 },
-                failure: function(b, a) {
-                    this.cache[g] = false;
-                    this.getOverview().setLoading(false);
-                    this.getController("Failure").show404("Class <b>" + g + "</b> was not found.")
-                },
-                scope: this
-            })
+                failure: z
+            });
+        }
+
+        function l(a){
+            j.html = a.responseText
+            me.showClass(j, h)
+        }
+
+        function z(b, a) {
+            me.cache[g] = false;
+            me.getOverview().setLoading(false);
+            me.getController("Failure").show404("Class <b>" + g + "</b> was not found.")
         }
     },
     showClass: function(e, f) {
