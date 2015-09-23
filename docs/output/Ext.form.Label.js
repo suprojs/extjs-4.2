@@ -2161,9 +2161,9 @@ Ext.data.JsonP.Ext_form_Label({
             "id": "method-initCls"
         }, {
             "tagname": "method",
-            "owner": "Ext.Component",
+            "owner": "Ext.form.Label",
             "meta": {
-                "since": "1.1.0",
+                "since": "4.2.2-supro",
                 "protected": true,
                 "template": true
             },
@@ -3484,6 +3484,14 @@ Ext.data.JsonP.Ext_form_Label({
             "meta": {},
             "name": "statesave",
             "id": "event-statesave"
+        }, {
+            "tagname": "event",
+            "owner": "Ext.form.Label",
+            "meta": {
+                "since": "4.2.2-supro"
+            },
+            "name": "textchange",
+            "id": "event-textchange"
         }],
         "css_mixin": []
     },

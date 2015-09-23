@@ -103,7 +103,7 @@ Ext.define('Ext.form.Label', {
         this.addEvents(
 <span id='Ext-form-Label-event-textchange'>             /**
 </span>             * @event textchange
-             * Fires when the text of a label is changed via the {@link #setText} method.
+             * Fired when the text of a label is changed via the {@link #setText} method.
              * @param {Ext.form.Label} this
              * @param {String} newText The new text
              * @param {String} oldText The original text
@@ -113,7 +113,7 @@ Ext.define('Ext.form.Label', {
     },
 
 <span id='Ext-form-Label-method-setText'>    /**
-</span>     * Updates the label's innerHTML with the specified string.
+</span>     * Updates the label's innerHTML with the specified string. Fires {@link #textchange} event.
      * @param {String} text The new label text
      * @param {Boolean} [encode=true] False to skip HTML-encoding the text when rendering it
      * to the label. This might be useful if you want to include tags in the label's innerHTML rather

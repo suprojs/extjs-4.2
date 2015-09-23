@@ -7152,11 +7152,11 @@ called when that component is owned by a <code>border</code> layout.
 </div>
 </div>
 </div>
-<div id="method-initComponent" class="member  inherited">
+<div id="method-initComponent" class="member  not-inherited">
 <a href="#" class="side expandable"><span>&nbsp;</span></a>
 <div class="title">
-<div class="meta"><a href="#!/api/Ext.Component" rel="Ext.Component" class="defined-in docClass">Ext.Component</a><br><a href="source/Component6.html#Ext-Component-method-initComponent" target="_blank" class="view-source">view source</a></div>
-<a href="#!/api/Ext.Component-method-initComponent" class="name expandable">initComponent</a>( <span class="pre"></span> )<strong class="protected signature">protected</strong><strong class="template signature">template</strong>
+<div class="meta"><a href="#!/api/Ext.form.Label" rel="Ext.form.Label" class="defined-in docClass">Ext.form.Label</a><br><a href="source/Label2.html#Ext-form-Label-method-initComponent" target="_blank" class="view-source">view source</a></div>
+<a href="#!/api/Ext.form.Label-method-initComponent" class="name expandable">initComponent</a>( <span class="pre"></span> )<strong class="protected signature">protected</strong><strong class="template signature">template</strong>
 </div>
 <div class="description">
 <div class="short">The initComponent template method is an important initialization step for a Component. ...</div>
@@ -7190,7 +7190,7 @@ instantiation of the class.
     <a href="#!/api/Ext-method-create" rel="Ext-method-create" class="docClass">Ext.create</a>('DynamicButtonText');
 });
 </code></pre>
-<p>Available since: <b>1.1.0</b></p>
+<p>Available since: <b>4.2.2-supro</b></p>
 <div class="signature-box template">
 <p>This is a <a href="#!/guide/components">template method</a>.
 a hook into the functionality of this class.
@@ -10689,12 +10689,12 @@ This may be one of:
 <a href="#" class="side expandable"><span>&nbsp;</span></a>
 <div class="title">
 <div class="meta"><span class="defined-in" rel="Ext.form.Label">Ext.form.Label</span><br><a href="source/Label2.html#Ext-form-Label-method-setText" target="_blank" class="view-source">view source</a></div>
-<a href="#!/api/Ext.form.Label-method-setText" class="name expandable">setText</a>( <span class="pre">text, [encode]</span> ) : <a href="#!/api/Ext.form.Label" rel="Ext.form.Label" class="docClass">Ext.form.Label</a><strong class="chainable signature">chainable</strong>
+<a href="#!/api/Ext.form.Label-method-setText" class="name">setText</a>( <span class="pre">text, [encode]</span> ) : <a href="#!/api/Ext.form.Label" rel="Ext.form.Label" class="docClass">Ext.form.Label</a><strong class="chainable signature">chainable</strong>
 </div>
 <div class="description">
-<div class="short">Updates the label's innerHTML with the specified string. ...</div>
+<div class="short">Updates the label's innerHTML with the specified string. Fires <a href="#!/api/Ext.form.Label-event-textchange" class="name expandable">textchange</a> event.</div>
 <div class="long">
-<p>Updates the label's innerHTML with the specified string.</p>
+<p>Updates the label's innerHTML with the specified string. Fires <a href="#!/api/Ext.form.Label-event-textchange" class="name">textchange</a> event.</p>
 <h3 class="pa">Parameters</h3>
 <ul>
 <li>
@@ -13220,6 +13220,42 @@ has a null implementation.
 </div>
 </div>
 </div>
+
+<div id="event-textchange" class="member not-inherited">
+<a href="#" class="side expandable"><span>&nbsp;</span></a>
+<div class="title">
+<div class="meta"><span class="defined-in" rel="Ext.form.Label">Ext.form.Label</span><br><a href="source/Label2.html#Ext-form-Label-event-textchange" target="_blank" class="view-source">view source</a></div>
+<a href="#!/api/Ext.form.Label-event-textchange" class="name expandable">textchange</a>( <span class="pre">this, oldText, newText, eOpts</span> )
+</div>
+<div class="description">
+<div class="short">Fired when the text of a label is changed by the <a href="#!/api/Ext.form.Label-method-setText" rel="Ext.form.Label-method-setText" class="name">setText</a> method. ...</div>
+<div class="long">
+<p>Fired when the text of a label is changed by the <a href="#!/api/Ext.form.Label-method-setText" rel="Ext.form.Label-method-setText" class="name">setText</a> method.</p>
+<h3 class="pa">Parameters</h3>
+<ul>
+<li>
+<span class="pre">this</span> : <a href="#!/api/Ext.form.Label" rel="Ext.form.Label" class="docClass">Ext.form.Label</a>
+<div class="sub-desc"></div>
+</li>
+<li>
+<span class="pre">oldText</span> : <a href="#!/api/String" rel="String" class="docClass">String</a>
+<div class="sub-desc"></div>
+</li>
+<li>
+<span class="pre">newText</span> : <a href="#!/api/String" rel="String" class="docClass">String</a>
+<div class="sub-desc"></div>
+</li>
+<li>
+<span class="pre">eOpts</span> : <a href="#!/api/Object" rel="Object" class="docClass">Object</a>
+<div class="sub-desc">
+<p>The options object passed to <a href="#!/api/Ext.util.Observable-method-addListener" rel="Ext.util.Observable-method-addListener" class="docClass">Ext.util.Observable.addListener</a>.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
