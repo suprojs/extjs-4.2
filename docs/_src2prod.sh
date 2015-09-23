@@ -15,6 +15,17 @@ sed '
 ' < "source/_$APP_FILE" >"$APP_FILE"
 }
 
+js(){
+# change JS files in place
+APP_FILE=$1
+
+sed -i '
+    s/^ *//
+    s/ *$//
+' "$APP_FILE"
+
+}
+
 htm(){
 # [ 'htm' = "$1" ]
 # $2 e.g. 'output/_Ext...htm' - input html file with '_' prefix
@@ -124,7 +135,7 @@ Ext.define("Docs.Application", {
 
 }
 
-[ 'search' = "$1" ] && search || [ 'htm' = "$1" ] && htm "$2" || app
+[ 'search' = "$1" ] && search || [ 'htm' = "$1" ] && htm "$2" || [ 'js' = "$1" ] && js "$2" || app
 echo "$APP_FILE
 Done"
 
