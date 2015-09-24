@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 GNU General Public License Usage
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (a6956528f9e51de3e1a3924e99f2b370f3c7cbb2)
+Source: ext-all-debug.js (16fe8da2b314463258625ddd6c77379040d34b45)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -24404,11 +24404,11 @@ len = tempHidden ? tempHidden.length : 0,
 comp;
 for (; i < len; i++) {
 comp = tempHidden[i];
-comp.el.show();
+comp.el && comp.el.show();
 comp.hidden = false;
 comp.setPosition(comp.x, comp.y);
 }
-delete this.tempHidden;
+this.tempHidden = void 0;
 },
 getActive : function() {
 return this.front;
@@ -44352,6 +44352,7 @@ callbackAuth
 )
 }
 function callbackAuth(err, json, res){
+if(!view) return
 if(!err){
 return view.fadeOut(finishAuth)
 } else {

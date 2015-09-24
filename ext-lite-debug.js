@@ -34865,11 +34865,11 @@ Ext.define('Ext.ZIndexManager', {
 
         for (; i < len; i++) {
             comp = tempHidden[i];
-            comp.el.show();
+            comp.el && comp.el.show();
             comp.hidden = false;
             comp.setPosition(comp.x, comp.y);
         }
-        delete this.tempHidden;
+        this.tempHidden = void 0;
     },
 
     

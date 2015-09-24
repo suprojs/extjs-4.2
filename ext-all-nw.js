@@ -4,7 +4,7 @@ Copyright (c) 2011-2013 Sencha Inc
 GNU General Public License Usage
 If you are unsure which license is appropriate for your use, please contact the sales department
 at http://www.sencha.com/contact.
-Source: ext-all-debug.js (a6956528f9e51de3e1a3924e99f2b370f3c7cbb2)
+Source: ext-all-debug.js (16fe8da2b314463258625ddd6c77379040d34b45)
 */
 var Ext = Ext || {};
 Ext._startTime = new Date().getTime();
@@ -26780,11 +26780,11 @@ len = tempHidden ? tempHidden.length : 0,
 comp;
 for (; i < len; i++) {
 comp = tempHidden[i];
-comp.el.show();
+comp.el && comp.el.show();
 comp.hidden = false;
 comp.setPosition(comp.x, comp.y);
 }
-delete this.tempHidden;
+this.tempHidden = void 0;
 },
 getActive : function() {
 return this.front;
@@ -33433,7 +33433,7 @@ group  = component.toggleGroup;
 Ext.copyTo(config, component, [
 'iconCls', 'icon', 'itemId', 'disabled', 'handler', 'scope', 'menu', 'tabIndex'
 ]);
-Ext.apply(config, {
+Ext.applyIf(config, {
 text       : component.overflowText || component.text,
 hideOnClick: hideOnClick,
 destroyMenu: false,
@@ -33444,6 +33444,8 @@ config.value = component.getValue();
 config.listeners.change = function(c, newVal, oldVal) {                            
 component.setValue(newVal);
 }
+} else if (component.text){
+config.text = component.text
 }
 else if (group || component.enableToggle) {
 Ext.apply(config, {
@@ -33455,12 +33457,18 @@ component.onClick(e);
 }
 });
 }
-if (component.isButton && !component.changeListenersAdded) {
+if (!component.changeListenersAdded) {
+if (component.isButton){
 component.on({
 textchange: me.onButtonAttrChange,
 iconchange: me.onButtonAttrChange,
 toggle:     me.onButtonToggle
 });
+} else if ('text' in component) {
+component.on({
+textchange: me.onTextChange
+});
+}
 component.changeListenersAdded = true;
 }
 delete config.margin;
@@ -33469,6 +33477,9 @@ delete config.xtype;
 delete config.id;
 delete config.itemId;
 return config;
+},
+onTextChange: function(cmp, newText) {
+cmp.overflowClone.setText(newText);
 },
 onButtonAttrChange: function(btn) {
 var clone = btn.overflowClone;
@@ -33524,6 +33535,7 @@ if (trigger && !this.layout.owner.items.contains(trigger)) {
 delete trigger.ownerCt;
 }
 Ext.destroy(this.menu, trigger);
+this.callParent();
 }
 });
 Ext.define('Ext.layout.container.boxOverflow.Scroller', {
@@ -66399,15 +66411,21 @@ return Ext.apply(me.callParent(), {
 htmlFor: me.forId || ''
 });
 },
+initComponent: function() {
+this.addEvents(
+'textchange'
+);
+},
 setText : function(text, encode){
 var me = this;
+me.fireEvent('textchange', this, text, me.text);
 encode = encode !== false;
 if(encode) {
 me.text = text;
-delete me.html;
+me.html = void 0;
 } else {
 me.html = text;
-delete me.text;
+me.text = void 0;
 }
 if(me.rendered){
 me.el.dom.innerHTML = encode !== false ? Ext.util.Format.htmlEncode(text) : text;
